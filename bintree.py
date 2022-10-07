@@ -1,3 +1,5 @@
+#Normal binary search tree with insert, preorder print, breadth first print, search and delete.
+
 class Node:
     def __init__(self, key):
         self.key = key
@@ -122,7 +124,6 @@ class BST:
         elif level > 1:
             self.printCurrentLevel(root.left, level-1)
             self.printCurrentLevel(root.right, level-1)
-
 
 if __name__ == "__main__":
     Tree = BST()
