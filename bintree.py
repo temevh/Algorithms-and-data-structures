@@ -66,7 +66,6 @@ class BST:
         current = node
         while(current.right is not None):
             current = current.right
-
         return current
     
     def remove(self, key):
