@@ -55,8 +55,10 @@ class AVL:
 
     # Single rotation: left rotation around root 
     def left_rotation(self, root):
-
-        # TODO
+        child = root.right
+        root.right = child.left
+        child.left = root
+        child.balance = root.balance = 0
 
         return root
 
@@ -80,10 +82,32 @@ class AVL:
 
     # Double rotation: right rotation around child node followed by left rotation around root
     def right_left_rotation(self, root):
-
-        # TODO
+        child = root.right
+        grandchild = child.left
+        child.left = grandchild.right
+        grandchild.right = child
+        root.right = grandchild.left
+        grandchild.left = root
+        root.balance = child.balance = 0
+        if grandchild.balance == -1:
+            root.balance = 1
+        elif grandchild.balance == 1:
+            child.balance = -1
+        grandchild.balance = 0
 
         return root
+
+    def preorder(self):
+        root = self.root
+        self.orderhelper(root)       
+        print()
+
+    def orderhelper(self, root):
+        if root == None:
+            return None
+        print(root.key, end=' ')
+        self.orderhelper(root.left)
+        self.orderhelper(root.right)
 
 if __name__ == "__main__":
     Tree = AVL()
