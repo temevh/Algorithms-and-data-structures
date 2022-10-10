@@ -105,7 +105,7 @@ class AVL:
     def orderhelper(self, root):
         if root == None:
             return None
-        print(root.key, end=' ')
+        print(str(root.key)+";" + str(root.balance), end=' ')
         self.orderhelper(root.left)
         self.orderhelper(root.right)
 
