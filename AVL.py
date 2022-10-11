@@ -1,3 +1,7 @@
+#This program creates a balanced binary tree with left, right, rightleft and leftright rotations
+#Made by Teemu H.
+#10.10.2022
+
 class AVLNode:
     # Constructor for new node
     def __init__(self, key: int):
