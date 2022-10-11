@@ -1,4 +1,28 @@
+from multiprocessing.resource_sharer import stop
+
+
 class MinHeap:
+
+    def __init__(self):
+        self.size = 0
+        self.heap_list = [0]
+
+    def shift_up(self, i):
+        Stop = False
+        while (i // 2 > 0) and Stop == False:
+            if self.heap_list[i] < self.heap_list[i // 2]:
+                self.heap_list[i], self.heap_list[i // 2] = self.heap_list[i // 2], self.heap_list[i]
+                Stop = True
+            i = i // 2
+
+    def push(self, key):
+        self.heap_list.append(key)
+        self.size += 1
+        self.shift_up(self.size)
+
+    def print(self):
+        
+
     
 
 
