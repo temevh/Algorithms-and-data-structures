@@ -6,9 +6,9 @@ class MinHeap:
 
     def push(self, data):
         self.heap.append(data)
-        self.heapify_up()
+        self.heap_up()
 
-    def heapify_up(self):
+    def heap_up(self):
         child = len(self.heap) - 1
         parent = (child - 1) // 2
         while self.heap[child] < self.heap[parent] and child != 0:
@@ -19,25 +19,26 @@ class MinHeap:
     def print(self):
         for i in self.heap:
             print(str(i)+" ", end="")
+        print()
 
     def pop(self):
         if not self.heap:
             return False
         self.heap[0], self.heap[-1] = self.heap[-1], self.heap[0]
         data = self.heap.pop()
-        self.heapify_down()
+        self.heap_down()
         return data
 
-    def heapify_down(self):
+    def heap_down(self):
         i = 0
         while (2*i+1) < len(self.heap):
-            smaller_idx = 2*i+1
+            min = 2*i+1
             if (2*i+2) < len(self.heap) and self.heap[2*i+2] < self.heap[2*i+1]:
-                smaller_idx = 2*i+2
-            if self.heap[smaller_idx] > self.heap[i]:
+                min = 2*i+2
+            if self.heap[min] > self.heap[i]:
                 return
-            self.heap[smaller_idx], self.heap[i] = self.heap[i], self.heap[smaller_idx]
-            i = smaller_idx
+            self.heap[min], self.heap[i] = self.heap[i], self.heap[min]
+            i = min
 
 if __name__ == "__main__":
     items = [4, 8, 6, 5, 1, 2, 3]
