@@ -6,14 +6,12 @@ class AVLNode:
         self.right = None
         self.balance = 0
     
-
 class AVL:
 
     # Constructor for new AVL
     def __init__(self):
         self.root = None
         self.is_balanced = True
-
 
     # Inserts a new key to the search tree
     def insert(self, key):
@@ -39,18 +37,17 @@ class AVL:
         elif key > root.key:
             root.right = self.insert_help(root.right, key)
             if not self.is_balanced:
-                if root.balance <= 0:
-                    self.is_balanced = root.balance == 1
+                if root.balance <= 0:                       # No Rotations needed, update balance variables
+                    self.is_balanced = root.balance == -1
                     root.balance += 1
                 else:
-                    if root.right.balance == -1:
-                        root = self.right_rotation(root)
+                    if root.right.balance == 1:
+                        root = self.left_rotation(root)
                     else:
                         root = self.right_left_rotation(root)
                     self.is_balanced = True
 
         return root
-
 
     # Single rotation: right rotation around root
     def right_rotation(self, root):
@@ -60,15 +57,13 @@ class AVL:
         child.balance = root.balance = 0    # Fix balance variables
         return child
 
-
     # Single rotation: left rotation around root 
     def left_rotation(self, root):
         child = root.right
-        root.left = child.right
-        child.right = root
+        root.right = child.left
+        child.left = root
         child.balance = root.balance = 0
-        return root
-
+        return child
 
     # Double rotation: left rotation around child node followed by right rotation around root
     def left_right_rotation(self, root):
@@ -86,23 +81,22 @@ class AVL:
         grandchild.balance = 0
         return grandchild
 
-
     # Double rotation: right rotation around child node followed by left rotation around root
     def right_left_rotation(self, root):
         child = root.right
         grandchild = child.left
-        child.right = grandchild.right
+        child.left = grandchild.right
         grandchild.right = child
         root.right = grandchild.left
         grandchild.left = root
         root.balance = child.balance = 0
-        if grandchild.balance == -1:
-            root.balance = 1
-        elif grandchild.balance == 1:
-            child.balance = -1
+        if grandchild.balance == 1:
+            root.balance = -1
+        elif grandchild.balance == -1:
+            child.balance = 1
         grandchild.balance = 0
-
-        return root
+        
+        return grandchild
 
     def preorder(self):
         root = self.root
