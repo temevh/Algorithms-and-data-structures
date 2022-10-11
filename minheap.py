@@ -1,30 +1,43 @@
-from multiprocessing.resource_sharer import stop
-
-
 class MinHeap:
 
     def __init__(self):
         self.size = 0
-        self.heap_list = [0]
+        self.heap = []
 
-    def shift_up(self, i):
-        Stop = False
-        while (i // 2 > 0) and Stop == False:
-            if self.heap_list[i] < self.heap_list[i // 2]:
-                self.heap_list[i], self.heap_list[i // 2] = self.heap_list[i // 2], self.heap_list[i]
-                Stop = True
-            i = i // 2
+    def push(self, data):
+        self.heap.append(data)
+        self.heapify_up()
 
-    def push(self, key):
-        self.heap_list.append(key)
-        self.size += 1
-        self.shift_up(self.size)
+    def heapify_up(self):
+        child = len(self.heap) - 1
+        parent = (child - 1) // 2
+        while self.heap[child] < self.heap[parent] and child != 0:
+            self.heap[child], self.heap[parent] = self.heap[parent], self.heap[child]
+            child = parent
+            parent = (child - 1) // 2
 
     def print(self):
-        
+        for i in self.heap:
+            print(str(i)+" ", end="")
 
-    
+    def pop(self):
+        if not self.heap:
+            return False
+        self.heap[0], self.heap[-1] = self.heap[-1], self.heap[0]
+        data = self.heap.pop()
+        self.heapify_down()
+        return data
 
+    def heapify_down(self):
+        i = 0
+        while (2*i+1) < len(self.heap):
+            smaller_idx = 2*i+1
+            if (2*i+2) < len(self.heap) and self.heap[2*i+2] < self.heap[2*i+1]:
+                smaller_idx = 2*i+2
+            if self.heap[smaller_idx] > self.heap[i]:
+                return
+            self.heap[smaller_idx], self.heap[i] = self.heap[i], self.heap[smaller_idx]
+            i = smaller_idx
 
 if __name__ == "__main__":
     items = [4, 8, 6, 5, 1, 2, 3]
