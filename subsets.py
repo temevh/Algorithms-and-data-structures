@@ -14,10 +14,9 @@ def subsets(n: int) -> list:
             if j & 1*2**k:
                 subset.append(fullset[k])
         subs.append(subset)
+        print(subs)
     subs.pop(0)
     return subs
-
-
 
 
 if __name__ == "__main__":
@@ -27,7 +26,7 @@ if __name__ == "__main__":
                         #  [4], [1, 4], [2, 4], [1, 2, 4], [3, 4], [1, 3, 4],
                         #  [2, 3, 4], [1, 2, 3, 4]]
 
-    S = subsets(10)
-    print(S[95])    # [6, 7]
-    print(S[254])   # [1, 2, 3, 4, 5, 6, 7, 8]
-    print(S[826])   # [1, 2, 4, 5, 6, 9, 10]
+    #S = subsets(10)
+    #print(S[95])    # [6, 7]
+    #print(S[254])   # [1, 2, 3, 4, 5, 6, 7, 8]
+    #print(S[826])   # [1, 2, 4, 5, 6, 9, 10]
