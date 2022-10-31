@@ -6,16 +6,16 @@ def subsets(n: int) -> list:
     fullset = []
     subs = []
     for i in range(1, n+1):
-        fullset.append(i)
+        fullset.append(i)                  #Change int to a list containing numbers from 1 to n
     #print(fullset)
-    for j in range(2**len(fullset)):
-        subset = []
-        for k in range(len(fullset)):
-            if j & 1*2**k:
-                subset.append(fullset[k])
-        subs.append(subset)
+    for j in range(2**len(fullset)):       #Loop for len^2
+        subset = []                        #empty array to list the subset elements
+        for k in range(len(fullset)):      #Loop to fill subset list 
+            if j & 1*2**k:                 #If j is True and 1*2**k
+                subset.append(fullset[k])  #Append the k element from fullset to subset
+        subs.append(subset)                #Append the subset to the final list of subsets
         print(subs)
-    subs.pop(0)
+    subs.pop(0)                            #Remove the unnecessary first (empty) list element
     return subs
 
 
