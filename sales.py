@@ -1,5 +1,28 @@
+from turtle import pos
+
+
 def sales(cars, customers) -> int:
-    # TODO
+    possible = 0
+    customers.sort()
+    cars.sort()
+    maxCar = 0
+    minCar = 15415152515
+    print(customers)
+    print(cars)
+    for i in range(len(customers)):
+        if cars[i] <= customers[i]:
+            possible += 1
+        elif cars[i+1] <= customers[i]:
+            i += 1
+        
+        if cars[i] > maxCar:
+            maxCar == cars[i]
+        if cars[i] < minCar:
+            minCar == cars[i]
+        
+
+    return possible
+
 
 if __name__ == "__main__":
     print(sales([20, 10, 15], [11, 25, 15]))                        # 3
