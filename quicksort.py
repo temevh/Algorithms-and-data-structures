@@ -23,15 +23,12 @@ def partition(A, left, right, pivot):
     return left
 
 
-
 def findpivot(A, i, j):
     return(int((i+j)/2))
 
-    
-    
   
 if __name__ == "__main__":
     A = [9, 7, 1, 8, 5, 3, 6, 2, 4]
-    #print(A)    # [9, 7, 1, 8, 5, 3, 6, 2, 4]
+    print(A)    # [9, 7, 1, 8, 5, 3, 6, 2, 4]
     qsort(A, 0, len(A)-1)
-    #print(A)    # [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    print(A)    # [1, 2, 3, 4, 5, 6, 7, 8, 9]
