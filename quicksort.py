@@ -3,9 +3,9 @@
 
 def qsort(A, i, j):
     pivot = findpivot(A,i,j)
-    A[j], A[pivot] = A[pivot], A[j]
+    A[pivot], A[j] = A[j], A[pivot]
     k = partition(A, i, j-1, A[j])
-    A[k], A[j] = A[j], A[k]
+    A[j], A[k] = A[k], A[j]
     if ((k-i) > 1):
         qsort(A, i, k-1)
     if ((j-k) > 1):
@@ -15,12 +15,11 @@ def partition(A, left, right, pivot):
     while (left <= right):
         while(A[left] != pivot):
             left += 1
-        while(right >= left and A[right] == pivot):
+        while((right >= left) and (A[right] == pivot)):
             right -= 1
         if right > left:
-            A[left], A[right] = A[right], A[left]
+            A[right], A[left] = A[left], A[right]
     return left
-
 
 def findpivot(A, i, j):
     return(int((i+j)/2))
