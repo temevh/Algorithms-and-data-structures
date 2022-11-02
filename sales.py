@@ -1,5 +1,6 @@
 # Greedy algorithm to calculate how many customers can buy cars.
 # Complexity nlogn
+# Author Teemu H. 2.11.2022
 
 def sales(cars, customers) -> int:
     customers.sort()
