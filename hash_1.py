@@ -1,5 +1,6 @@
 # BM40A1500 Algorithms and data structures
 # Practical assignment 1, Implementing a hash table
+# Collision will be handled with LINEAR PROBING
 class HashTable:
     def __init__(self) -> None:
         self.SIZE = 10
@@ -20,6 +21,10 @@ class HashTable:
         h = self.hasher(key)
         return self.arr[h]
 
+    def delete(self, key):
+        h = self.hasher(key)
+        self.arr[h] = None
+
 
 t = HashTable()
 print(t.arr)
@@ -28,3 +33,5 @@ print(t.arr)
 t.adder(12451215)
 print(t.arr)
 print(t.getter("Teemu H"))
+t.delete("Teemu H")
+print(t.arr)
