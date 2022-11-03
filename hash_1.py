@@ -2,11 +2,29 @@
 # Practical assignment 1, Implementing a hash table
 class HashTable:
     def __init__(self) -> None:
-        self.SIZE = 100
+        self.SIZE = 10
+        # Filling the array with NONE using list comprehension
         self.arr = [None for i in range(self.SIZE)]
 
     def hasher(self, key):
         v = 0
         for c in str(key):
-            h += ord(c)
-        return h % self.SIZE
+            v += ord(c)
+        return v % self.SIZE
+
+    def adder(self, key):
+        h = self.hasher(key)
+        self.arr[h] = key
+
+    def getter(self, key):
+        h = self.hasher(key)
+        return self.arr[h]
+
+
+t = HashTable()
+print(t.arr)
+t.adder("Teemu H")
+print(t.arr)
+t.adder(12451215)
+print(t.arr)
+print(t.getter("Teemu H"))
