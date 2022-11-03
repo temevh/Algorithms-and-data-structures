@@ -3,19 +3,18 @@
 # Collision will be handled with LINEAR PROBING
 class HashTable:
     def __init__(self) -> None:
-        self.SIZE = 10
-        # Filling the array with NONE using list comprehension
-        self.arr = [None for i in range(self.SIZE)]
+        self.SIZE = 10  # Initialize the (fixed) size for the array
+        # Fill the array with NONE elements
+        self.arr = [[] for i in range(self.SIZE)]
 
-    def hasher(self, key):
-        v = 0
-        for c in str(key):
-            v += ord(c)
-        return v % self.SIZE
+    def hasher(self, key):  # Calculate the hash
+        v = 0  # Initialize the (v)alue to zero
+        for c in str(key):  # Loop through the given key, which will be converted to string, to handle int and str cases
+            v += ord(c)  # Calculate the sum of ascii values
+        return v % self.SIZE  # Return the module of ascii sum and the size of the array
 
     def adder(self, key):
         h = self.hasher(key)
-        self.arr[h] = key
 
     def getter(self, key):
         h = self.hasher(key)
@@ -27,11 +26,4 @@ class HashTable:
 
 
 t = HashTable()
-print(t.arr)
-t.adder("Teemu H")
-print(t.arr)
-t.adder(12451215)
-print(t.arr)
-print(t.getter("Teemu H"))
-t.delete("Teemu H")
 print(t.arr)
