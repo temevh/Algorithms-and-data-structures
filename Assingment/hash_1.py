@@ -29,7 +29,7 @@ class HashTable:
 
     def adder(self, key):
         h = self.hasher(key)
-        #print("hastattu", h)
+        # print("hastattu", h)
         found = False
         for index, element in enumerate(self.arr[h]):
             if len(element) == 2 and element[0] == key:
@@ -40,11 +40,20 @@ class HashTable:
             self.arr[h].append(key)
 
     def getter(self, key):
+        spot = ""
         h = self.hasher(key)  # Calculate the hash
         # loop through the linked list at the given index(hash)
-        print("haettu indeksi", h)
+        # for element in self.arr[h]:
+        i = 0
         for element in self.arr[h]:
-            print(element)
+            i += 1
+            if element == key:
+                spot = "Key found\nKey hash: " + \
+                    str(h) + "\nKey is the " + str(i) + \
+                    " nth element in list " + str(h)
+                return spot
+        else:
+            print("key not found")
 
     def delete(self, key):
         h = self.hasher(key)  # Calculate the hash
