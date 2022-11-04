@@ -5,9 +5,13 @@
 # Average Case O(1)
 # Worst case O(n) if all keys have the same hash, essentially the program goes through a linked list, and the complexity for list look-ups is O(n)
 # Duplicates not allowed
+
+import time
+
+
 class HashTable:
     def __init__(self) -> None:
-        self.SIZE = 10  # Initialize the (fixed) size for the array
+        self.SIZE = 214030  # Initialize the (fixed) size for the array
         # Fill the array with empty arrays to allow linked lists
         self.arr = [[] for i in range(self.SIZE)]
 
@@ -51,13 +55,17 @@ class HashTable:
     def printTable(self):
         print(self.arr)  # Print the hash table
 
+    def addFromFile(self):  # Function to add words from a file to the hash table
+        # Replace the first parameter with the file which the data should be read from
+        file = open("hashText.txt", "r")
+        for line in file:
+            # Pass the word from the file to the hash table, removing the newline(\n)
+            self.adder(line.strip())
 
+
+st = time.time()
 t = HashTable()
-t.adder("testi2")
-t.adder("testi2")
-t.adder("testi2")
-t.adder("testi2")
-t.printTable()
-t.printTable()
-print(t.getter("testi2"))
-print(t.getter("eioo"))
+t.addFromFile()
+et = time.time()
+time_taken = et-st
+print("Execution time: ", time_taken, "seconds")
