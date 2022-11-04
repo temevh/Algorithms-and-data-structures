@@ -7,7 +7,7 @@
 class HashTable:
     def __init__(self) -> None:
         self.SIZE = 10  # Initialize the (fixed) size for the array
-        # Fill the array with NONE elements
+        # Fill the array with empty arrays to allow linked lists
         self.arr = [[] for i in range(self.SIZE)]
 
     def hasher(self, key):  # Calculate the hash
@@ -18,17 +18,37 @@ class HashTable:
 
     def adder(self, key):
         h = self.hasher(key)
-        self.arr[h] = key
+        #print("adder h", h)
+        contains = False
+        for idx, element in enumerate(self.arr[h]):
+            if len(element) == 2 and element[0] == key:
+                self.arr[h][idx] = key
+                contains = True
+                break
+        if not contains:
+            self.arr[h].append(key)
 
     def getter(self, key):
         h = self.hasher(key)
+        for element in self.arr[h]:
+            if element[0] == key:
+                return key
         return self.arr[h]
 
     def delete(self, key):
         h = self.hasher(key)
-        self.arr[h] = None
+        for index, element in enumerate(self.arr[h]):
+            if element == key:
+                del self.arr[h][element]
+        return None
+
+    def printTable(self):
+        print(self.arr)
 
 
 t = HashTable()
-t.adder("testi1")
-print(t.arr)
+t.adder("testi2")
+t.adder(12512512)
+t.printTable()
+t.delete("testi2")
+t.printTable()
