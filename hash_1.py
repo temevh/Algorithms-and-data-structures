@@ -63,9 +63,10 @@ class HashTable:
             self.adder(line.strip())
 
 
-st = time.time()
 t = HashTable()
 t.addFromFile()
+st = time.time()  # Implementing a timer to calculate the running time
+print(t.getter("lazzarone"))
 et = time.time()
 time_taken = et-st
 print("Execution time: ", time_taken, "seconds")
