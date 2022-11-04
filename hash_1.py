@@ -1,6 +1,7 @@
 # BM40A1500 Algorithms and data structures
 # Practical assignment 1, Implementing a hash table
 # Collision will be handled with LINEAR PROBING
+# Search will return the spot on the hash table, where the given key is stored at
 class HashTable:
     def __init__(self) -> None:
         self.SIZE = 10  # Initialize the (fixed) size for the array
