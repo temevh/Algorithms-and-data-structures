@@ -38,13 +38,14 @@ class HashTable:
         spot = ""
         h = self.hasher(key)  # Calculate the hash
         # loop through the linked list at the given index(hash)
-        for element in self.arr[h]:
-            if element == key:  # If the key to be searched matches the current loop element
+        for index in range(len(self.arr[h])):
+            # If the key to be searched matches the current loop element
+            if self.arr[h][index] == key:
                 # return key  # return key
-                spot = ("Key found at list " + str(h))
+                spot = ("Key found at list " + str(h+1))
                 return spot
-            else:  # Else if key not found
-                return "Key not found"  # Return "key not found"
+        else:
+            return "key not found"
 
     def delete(self, key):
         h = self.hasher(key)  # Calculate the hash
@@ -74,7 +75,7 @@ class HashTable:
 t = HashTable(800)
 t.addFromFile()
 st = time.time()  # Implementing a timer to calculate the running time
-print(t.getter("ajankohtainen"))
+print(t.getter("auditiitavnie"))
 et = time.time()
 time_taken = et-st
 print("Execution time: ", time_taken, "seconds")
