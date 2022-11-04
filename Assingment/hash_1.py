@@ -5,6 +5,7 @@
 # Average Case O(1)
 # Worst case O(n) if all keys have the same hash, essentially the program goes through a linked list, and the complexity for list look-ups is O(n)
 # Duplicates not allowed
+# Using % self.size as the hasher, with large files most of the linked lists are left empty
 
 import time
 
@@ -15,11 +16,16 @@ class HashTable:
         # Fill the array with empty arrays to allow linked lists
         self.arr = [[] for i in range(self.SIZE)]
 
-    def hasher(self, key):  # Calculate the hash
-        v = 0  # Initialize the (v)alue to zero
-        for c in str(key):  # Loop through the given key, which will be converted to string, to handle int and str cases
-            v += ord(c)  # Calculate the sum of ascii values
-        return v % self.SIZE  # Return the module of ascii sum and the size of the array
+    def hasher(self, key):  # Calculate hash using string folding
+        sum = 0
+        mul = 1
+        for i in range(len(str(key))):
+            if (i % 4 == 0):
+                mul = 1
+            else:
+                mul = mul * 256
+            sum += ord(key[i]) * mul
+        return sum % self.SIZE
 
     def adder(self, key):
         h = self.hasher(key)  # Calculate the hash
@@ -61,7 +67,7 @@ class HashTable:
 
     def addFromFile(self):  # Function to add words from a file to the hash table
         # Replace the first parameter with the file which the data should be read from
-        file = open("sanatPieni.txt", "r")
+        file = open("kaikkisanat.txt", "r")
         for line in file:
             # Pass the word from the file to the hash table, removing the newline(\n)
             self.adder(line.strip())
@@ -72,10 +78,10 @@ class HashTable:
             file.write(str(element)+"\n")
 
 
-t = HashTable(800)
+t = HashTable(93086)
 t.addFromFile()
 st = time.time()  # Implementing a timer to calculate the running time
-print(t.getter("auditiitavnie"))
+print(t.getter("tietojenkäsittelyjärjestelmä"))
 et = time.time()
 time_taken = et-st
 print("Execution time: ", time_taken, "seconds")
