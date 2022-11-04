@@ -2,6 +2,8 @@
 # Practical assignment 1, Implementing a hash table
 # Collision will be handled with LINEAR PROBING
 # Search will return the spot on the hash table, where the given key is stored at
+# Average Case O(1)
+# Worst case O(n) if all keys have the same hash, essentially the program goes through a linked list, and the complexity for list look-ups is O(n)
 class HashTable:
     def __init__(self) -> None:
         self.SIZE = 10  # Initialize the (fixed) size for the array
@@ -16,6 +18,7 @@ class HashTable:
 
     def adder(self, key):
         h = self.hasher(key)
+        self.arr[h] = key
 
     def getter(self, key):
         h = self.hasher(key)
@@ -27,4 +30,5 @@ class HashTable:
 
 
 t = HashTable()
+t.adder("testi1")
 print(t.arr)
