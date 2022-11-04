@@ -4,6 +4,7 @@
 # Search will return the spot on the hash table, where the given key is stored at
 # Average Case O(1)
 # Worst case O(n) if all keys have the same hash, essentially the program goes through a linked list, and the complexity for list look-ups is O(n)
+# Duplicates not allowed
 class HashTable:
     def __init__(self) -> None:
         self.SIZE = 10  # Initialize the (fixed) size for the array
@@ -17,38 +18,46 @@ class HashTable:
         return v % self.SIZE  # Return the module of ascii sum and the size of the array
 
     def adder(self, key):
-        h = self.hasher(key)
-        #print("adder h", h)
-        contains = False
-        for idx, element in enumerate(self.arr[h]):
-            if len(element) == 2 and element[0] == key:
-                self.arr[h][idx] = key
-                contains = True
-                break
+        h = self.hasher(key)  # Calculate the hash
+        contains = False  # Set the variable contains to false, this will be used to see if the key already exists in the hash table
+        # Loop through the linked list at the given index (from the hash value)
+        for index in range(len(self.arr[h])):
+            if self.arr[h][index] == key:  # If the key is already found in the linked list
+                contains = True  # Set contains to true
+                break  # Break out of the loop, do not add anything to the list/hash table
+        # If the key is not found in the list/table (contains stays as False)
         if not contains:
+            # Append the key to the appropriate linked list
             self.arr[h].append(key)
 
     def getter(self, key):
-        h = self.hasher(key)
+        h = self.hasher(key)  # Calculate the hash
+        # loop through the linked list at the given index(hash)
         for element in self.arr[h]:
-            if element[0] == key:
-                return key
-        return self.arr[h]
+            if element == key:  # If the key to be searched matches the current loop element
+                return key  # return key
+            else:  # Else if key not found
+                return "Key not found"  # Return "key not found"
 
     def delete(self, key):
-        h = self.hasher(key)
+        h = self.hasher(key)  # Calculate the hash
+        # Loop through the through the linked list at the given index(hash) using enumerate, so we can keep trakc of the index, without needing a separate counter variable
         for index, element in enumerate(self.arr[h]):
-            if element == key:
-                del self.arr[h][element]
+            if element == key:  # If current element matches the key that is being looked for
+                # Delete the key at the current index of the searched linked list
+                del self.arr[h][index]
         return None
 
     def printTable(self):
-        print(self.arr)
+        print(self.arr)  # Print the hash table
 
 
 t = HashTable()
 t.adder("testi2")
-t.adder(12512512)
+t.adder("testi2")
+t.adder("testi2")
+t.adder("testi2")
 t.printTable()
-t.delete("testi2")
 t.printTable()
+print(t.getter("testi2"))
+print(t.getter("eioo"))
