@@ -12,7 +12,7 @@ import time
 
 class HashTable:
     def __init__(self, sizeOfArray) -> None:
-        self.SIZE = sizeOfArray+1  # Initialize the (fixed) size for the array
+        self.SIZE = sizeOfArray  # Initialize the (fixed) size for the array
         # Fill the array with empty arrays to allow linked lists
         self.arr = [[] for i in range(self.SIZE)]
 
@@ -28,30 +28,23 @@ class HashTable:
         return sum % self.SIZE
 
     def adder(self, key):
-        h = self.hasher(key)  # Calculate the hash
-        contains = False  # Set the variable contains to false, this will be used to see if the key already exists in the hash table
-        # Loop through the linked list at the given index (from the hash value)
-        for index in range(len(self.arr[h])):
-            if self.arr[h][index] == key:  # If the key is already found in the linked list
-                contains = True  # Set contains to true
-                break  # Break out of the loop, do not add anything to the list/hash table
-        # If the key is not found in the list/table (contains stays as False)
-        if not contains:
-            # Append the key to the appropriate linked list
+        h = self.hasher(key)
+        #print("hastattu", h)
+        found = False
+        for index, element in enumerate(self.arr[h]):
+            if len(element) == 2 and element[0] == key:
+                self.arr[h][index] = key
+                found = True
+                break
+        if not found:
             self.arr[h].append(key)
 
     def getter(self, key):
-        spot = ""
         h = self.hasher(key)  # Calculate the hash
         # loop through the linked list at the given index(hash)
-        for index in range(len(self.arr[h])):
-            # If the key to be searched matches the current loop element
-            if self.arr[h][index] == key:
-                # return key  # return key
-                spot = ("Key found at list " + str(h+1))
-                return spot
-        else:
-            return "key not found"
+        print("haettu indeksi", h)
+        for element in self.arr[h]:
+            print(element)
 
     def delete(self, key):
         h = self.hasher(key)  # Calculate the hash
@@ -67,22 +60,20 @@ class HashTable:
 
     def addFromFile(self):  # Function to add words from a file to the hash table
         # Replace the first parameter with the file which the data should be read from
-        file = open("kaikkisanat.txt", "r")
+        file = open("kaikkisanat.txt", "r", encoding="utf-8")
         for line in file:
             # Pass the word from the file to the hash table, removing the newline(\n)
             self.adder(line.strip())
 
     def writeToFile(self):
-        file = open("hashResult.txt", "w")
+        file = open("hashResult.txt", "w", encoding="utf-8")
         for element in self.arr:
             file.write(str(element)+"\n")
 
 
-t = HashTable(93086)
+t = HashTable(10000)
 t.addFromFile()
-st = time.time()  # Implementing a timer to calculate the running time
-print(t.getter("tietojenkäsittelyjärjestelmä"))
-et = time.time()
-time_taken = et-st
-print("Execution time: ", time_taken, "seconds")
+print(t.getter("aaltoilu"))
+# t.adder("tietojenkäsittelyjärjestelmä")
+# print(t.getter("tietojenkäsittelyjärjestelmä"))
 t.writeToFile()

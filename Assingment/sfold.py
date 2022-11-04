@@ -10,4 +10,4 @@ def sfold(key, size):
     return sum % size
 
 
-print(sfold("aaaa", 100))
+print(sfold("aaltoilu", 100))
