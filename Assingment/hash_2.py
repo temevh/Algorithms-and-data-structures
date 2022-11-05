@@ -81,8 +81,11 @@ class HashTable:
 
     def writeToFile(self):
         file = open("hashResult.txt", "w", encoding="utf-8")
-        for element in self.arr:
-            file.write(str(element)+"\n")
+        file.write("INDEX|ARRAY\n")
+        file.write("-----|-----------\n")
+        for i in range(self.SIZE):
+            file.write(str(i) + str("    | ")+str(self.arr[i])+"\n")
+        file.write("-----------------")
 
 
 t = HashTable(3)
@@ -97,3 +100,4 @@ t.delete('BM40A1500')
 t.delete(1234)
 t.delete("aaaabbbbcccc")
 t.printTable()
+t.writeToFile()
