@@ -86,16 +86,14 @@ class HashTable:
         for element in self.arr:
             file.write(str(element)+"\n")
 
+    # A function to print each hash table element on its own line to help with troubleshooting etc.
+    def writeToFile2(self):
+        file = open("hashResult.txt", "w", encoding="utf-8")
+        for line in self.arr:
+            for elem in line:
+                file.write(str(elem)+"\n")
 
-t = HashTable(10)
-t.adder(35355125)
-t.adder(141)
-t.adder("teesti")
-t.adder("auton moottori")
-t.adder("tietokone")
-t.adder(11115111111)
-t.adder("te")
-t.writeToFile()
-print(t.getter(141))
-print(t.getter("teesti"))
-print(t.getter("tietokone"))
+
+t = HashTable(10000)
+t.addFromFile()
+t.writeToFile2()
