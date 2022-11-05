@@ -43,6 +43,7 @@ class HashTable:
         if not found:  # Else if the loop does not encounter the key
             # Add the key to the given list at the array
             self.arr[h].append(key)
+        self.printTable()
 
     def getter(self, key):
         key = str(key)

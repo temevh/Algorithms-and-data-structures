@@ -71,7 +71,9 @@ class HashTable:
         return None
 
     def printTable(self):
-        print(self.arr)  # Print the hash table
+        print("INDEX|ARRAY")
+        for i in range(self.SIZE):
+            print(i, str("   |"), self.arr[i])
 
     def addFromFile(self):  # Function to add words from a file to the hash table
         # Replace the first parameter with the file which the data should be read from
@@ -94,6 +96,5 @@ class HashTable:
                 file.write(str(elem)+"\n")
 
 
-t = HashTable(10000)
+t = HashTable(100)
 t.addFromFile()
-t.writeToFile2()
