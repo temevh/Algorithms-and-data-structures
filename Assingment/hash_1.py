@@ -96,5 +96,5 @@ class HashTable:
                 file.write(str(elem)+"\n")
 
 
-t = HashTable(100)
+t = HashTable(100000)
 t.addFromFile()
