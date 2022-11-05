@@ -17,6 +17,7 @@ class HashTable:
         self.arr = [[] for i in range(self.SIZE)]
 
     def hasher(self, key):  # Calculate hash using string folding
+        key = str(key)
         sum = 0
         mul = 1
         for i in range(len(str(key))):
@@ -29,6 +30,7 @@ class HashTable:
 
     def adder(self, key):
         h = self.hasher(key)
+        key = str(key)
         # print("hastattu", h)
         found = False
         for index, element in enumerate(self.arr[h]):
@@ -40,6 +42,7 @@ class HashTable:
             self.arr[h].append(key)
 
     def getter(self, key):
+        key = str(key)
         spot = ""
         h = self.hasher(key)  # Calculate the hash
         # loop through the linked list at the given index(hash)
@@ -80,9 +83,14 @@ class HashTable:
             file.write(str(element)+"\n")
 
 
-t = HashTable(10000)
-t.addFromFile()
-print(t.getter("aaltoilu"))
-# t.adder("tietojenkäsittelyjärjestelmä")
-# print(t.getter("tietojenkäsittelyjärjestelmä"))
+t = HashTable(10)
+t.adder(35355125)
+t.adder(141)
+t.adder("teesti")
+t.adder("auton moottori")
+t.adder("tietokone")
+t.adder(11115111111)
 t.writeToFile()
+print(t.getter(141))
+print(t.getter("teesti"))
+print(t.getter("tietokone"))
