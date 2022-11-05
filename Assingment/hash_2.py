@@ -43,7 +43,7 @@ class HashTable:
         if not found:  # Else if the loop does not encounter the key
             # Add the key to the given list at the array
             self.arr[h].append(key)
-        self.printTable()
+        # self.printTable()
 
     def getter(self, key):
         key = str(key)
@@ -72,8 +72,10 @@ class HashTable:
 
     def printTable(self):
         print("INDEX|ARRAY")
+        print("-----|-----------")
         for i in range(self.SIZE):
             print(i, str("   |"), self.arr[i])
+        print("-----------------")
 
     # A test function to write the hash table to file, to make sure everything gets added
 
