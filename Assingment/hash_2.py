@@ -43,7 +43,7 @@ class HashTable:
         if not found:  # Else if the loop does not encounter the key
             # Add the key to the given list at the array
             self.arr[h].append(key)
-        # self.printTable()
+        self.printTable()
 
     def getter(self, key):
         key = str(key)
@@ -54,15 +54,18 @@ class HashTable:
         for element in self.arr[h]:
             i += 1
             if element == key:  # If the current loop element matches the key to be searched for
-                spot = "Key found\nKey hash: " + \
+                spot = "Key " + str(key) + " found\nKey hash: " + \
                     str(h) + "\nKey is the " + str(i) + \
-                    " nth element in list " + str(h)
-                return spot  # Add information to the spot variable, return it
+                    ". element in list " + str(h) + "\n"
+                print(spot)
+                return None  # Add information to the spot variable, return it
         else:
-            print("key not found")  # If key not found, return "key not found"
+            # If key not found, return "key not found"
+            print("key " + str(key) + " not found\n")
 
     def delete(self, key):
         h = self.hasher(key)  # Calculate the hash
+        key = str(key)
         # Loop through the through the linked list at the given index(hash) using enumerate, so we can keep trakc of the index, without needing a separate counter variable
         for index, element in enumerate(self.arr[h]):
             if element == key:  # If current element matches the key that is being looked for
@@ -71,14 +74,13 @@ class HashTable:
         return None
 
     def printTable(self):
-        print("INDEX|ARRAY")
+        print("INDEX|ARRAY")  # Create a grid with the hearders INDEX and ARRAY
         print("-----|-----------")
         for i in range(self.SIZE):
-            print(i, str("   |"), self.arr[i])
+            print(i, str("   |"), self.arr[i])  # Add the current value
         print("-----------------")
 
     # A test function to write the hash table to file, to make sure everything gets added
-
     def writeToFile(self):
         file = open("hashResult.txt", "w", encoding="utf-8")
         file.write("INDEX|ARRAY\n")
@@ -96,9 +98,10 @@ t.adder(4328989)
 t.adder('BM40A1500')
 t.adder(-12456)
 t.adder("aaaabbbbcccc")
-t.adder("Leevi on tyhmä")
+t.getter(-12456)
+t.getter("hashtable")
+t.getter(1235)
 t.delete('BM40A1500')
 t.delete(1234)
 t.delete("aaaabbbbcccc")
 t.printTable()
-t.writeToFile()
