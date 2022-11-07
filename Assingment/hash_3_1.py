@@ -73,16 +73,6 @@ class HashTable:
             print(i, str("   |"), self.arr[i])  # Add the current value
         print("-----------------")
 
-    def writeOrdered(self):
-        words = []
-        file = open("hashOrdered.txt", "w", encoding="utf-8")
-        for line in self.arr:
-            for elem in line:
-                words.append(elem)
-        words.sort()
-        for elem in words:
-            file.write(str(elem)+"\n")
-
     def comparer(self):
         samat = []
         file = open("kaikkisanat.txt", "r", encoding="utf-8")
@@ -97,7 +87,17 @@ class HashTable:
         file2 = open("matches.txt", "w", encoding="utf-8")
         for item in samat:
             file2.write(str(item)+"\n")
-        print("Matches:", matches)
+        print("MATCHING WORDS:", matches)
+
+    def writeToFile(self, init, add, comp, runtime_total):
+        file = open("compareRuntime.txt", "a", encoding="utf-8")
+        file.write("ACTION       |   RUNTIME(s)\n")
+        file.write("-------------|----------------\n")
+        file.write("Table init   |"+str("%.8f" % init)+"\n")
+        file.write("Add to table |"+str("%.8f" % add)+"\n")
+        file.write("Compare      |"+str("%.8f" % comp)+"\n")
+        file.write("-------------|----------------\n")
+        file.write("Total runtime: "+str("%.8f" % runtime_total))
 
 
 runtime_total = 0
@@ -123,3 +123,4 @@ print("Add to table |", "%.8f" % add)
 print("Compare      |", "%.8f" % comp)
 print("-------------|----------------")
 print("Total runtime: ", "%.8f" % runtime_total)
+t.writeToFile(init, add, comp, runtime_total)
