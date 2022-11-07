@@ -91,4 +91,4 @@ Compare      |0.54318500
 Total runtime: 1.85961938
 Table size: 10000
 
-Average (total) runtime: 
+Average (total) runtime: 1.740960908
