@@ -91,6 +91,7 @@ class HashTable:
 
     def writeToFile(self, init, add, comp, runtime_total):
         file = open("compareRuntime.txt", "a", encoding="utf-8")
+        #file.write("***TABLE SIZE: " + str(self.SIZE) + "***\n")
         file.write("ACTION       |   RUNTIME(s)\n")
         file.write("-------------|----------------\n")
         file.write("Table init   |"+str("%.8f" % init)+"\n")
@@ -98,6 +99,7 @@ class HashTable:
         file.write("Compare      |"+str("%.8f" % comp)+"\n")
         file.write("-------------|----------------\n")
         file.write("Total runtime: "+str("%.8f" % runtime_total))
+        file.write("\nTable size: " + str(self.SIZE))
 
 
 runtime_total = 0
@@ -123,4 +125,5 @@ print("Add to table |", "%.8f" % add)
 print("Compare      |", "%.8f" % comp)
 print("-------------|----------------")
 print("Total runtime: ", "%.8f" % runtime_total)
+print("Table size:", t.SIZE)
 t.writeToFile(init, add, comp, runtime_total)
