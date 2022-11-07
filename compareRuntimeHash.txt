@@ -1,16 +1,94 @@
+10 runs (ubuntu) with table size 10000
+
+
 ACTION       |   RUNTIME(s)
 -------------|----------------
-Table init   |0.00000000
-Add to table |2.79099917
-Compare      |0.96204042
+Table init   |0.00054526
+Add to table |1.15976977
+Compare      |0.50522709
 -------------|----------------
-Total runtime: 3.75303960
+Total runtime: 1.66554213
 Table size: 10000
+
 ACTION       |   RUNTIME(s)
 -------------|----------------
-Table init   |0.00100040
-Add to table |2.92945862
-Compare      |1.05099893
+Table init   |0.00058126
+Add to table |1.42941546
+Compare      |0.47645140
 -------------|----------------
-Total runtime: 3.98145795
+Total runtime: 1.90644813
 Table size: 10000
+
+ACTION       |   RUNTIME(s)
+-------------|----------------
+Table init   |0.00054908
+Add to table |1.23853588
+Compare      |0.46605206
+-------------|----------------
+Total runtime: 1.70513701
+Table size: 10000
+
+ACTION       |   RUNTIME(s)
+-------------|----------------
+Table init   |0.00055337
+Add to table |1.23838830
+Compare      |0.47286201
+-------------|----------------
+Total runtime: 1.71180367
+Table size: 10000
+
+ACTION       |   RUNTIME(s)
+-------------|----------------
+Table init   |0.00058031
+Add to table |1.22864699
+Compare      |0.47800088
+-------------|----------------
+Total runtime: 1.70722818
+Table size: 10000
+
+ACTION       |   RUNTIME(s)
+-------------|----------------
+Table init   |0.00060773
+Add to table |1.22951579
+Compare      |0.46823168
+-------------|----------------
+Total runtime: 1.69835520
+Table size: 10000
+
+ACTION       |   RUNTIME(s)
+-------------|----------------
+Table init   |0.00052786
+Add to table |1.26363778
+Compare      |0.46432042
+-------------|----------------
+Total runtime: 1.72848606
+Table size: 10000
+
+ACTION       |   RUNTIME(s)
+-------------|----------------
+Table init   |0.00059032
+Add to table |1.23984838
+Compare      |0.46578002
+-------------|----------------
+Total runtime: 1.70621872
+Table size: 10000
+
+ACTION       |   RUNTIME(s)
+-------------|----------------
+Table init   |0.00053787
+Add to table |1.25252986
+Compare      |0.46770287
+-------------|----------------
+Total runtime: 1.72077060
+Table size: 10000
+
+ACTION       |   RUNTIME(s)
+-------------|----------------
+Table init   |0.00060630
+Add to table |1.31582808
+Compare      |0.54318500
+-------------|----------------
+Total runtime: 1.85961938
+Table size: 10000
+
+Average (total) runtime: 
