@@ -49,9 +49,11 @@ class HashTable:
         key = str(key)
         spot = ""  # A placeholder variable for the potential info that is to be returned if the given key is found
         h = self.hasher(key)  # Calculate the hash
+        print("Etsittävä hash ", h)
         i = 0
         # loop through the linked list at the given index(hash)
         for element in self.arr[h]:
+            print(element)
             i += 1
             if element == key:  # If the current loop element matches the key to be searched for
                 spot = "Key found\nKey hash: " + \
@@ -106,6 +108,7 @@ class HashTable:
             file.write(str(elem)+"\n")
 
 
-t = HashTable(100000)
+t = HashTable(10000)
 t.addFromFile()
-t.writeOrdered()
+print(t.getter("kirkkoväki"))
+t.writeToFile()

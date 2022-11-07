@@ -91,7 +91,6 @@ class HashTable:
 
     def writeToFile(self, init, add, comp, runtime_total):
         file = open("compareRuntime.txt", "a", encoding="utf-8")
-        #file.write("***TABLE SIZE: " + str(self.SIZE) + "***\n")
         file.write("ACTION       |   RUNTIME(s)\n")
         file.write("-------------|----------------\n")
         file.write("Table init   |"+str("%.8f" % init)+"\n")
