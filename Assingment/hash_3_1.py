@@ -97,10 +97,29 @@ class HashTable:
         file2 = open("matches.txt", "w", encoding="utf-8")
         for item in samat:
             file2.write(str(item)+"\n")
-        print("matches:", matches)
+        print("Matches:", matches)
 
 
+runtime_total = 0
+st = time.time()
 t = HashTable(10000)
+et = time.time()
+init = et-st
+runtime_total += et-st
+st = time.time()
 t.addFromFile()
-t.writeOrdered()
+et = time.time()
+add = et-st
+runtime_total += et-st
+st = time.time()
 t.comparer()
+et = time.time()
+comp = et-st
+runtime_total += et-st
+print("Action       |   Runtime")
+print("-------------|----------------")
+print("table init   |", "%.8f" % init)
+print("add to table |", "%.8f" % add)
+print("compare      |", "%.8f" % comp)
+print("-------------|----------------")
+print("Total runtime: ", "%.8f" % runtime_total)
