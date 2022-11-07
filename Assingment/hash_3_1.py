@@ -78,19 +78,16 @@ class HashTable:
         file = open("kaikkisanat.txt", "r", encoding="utf-8")
         matches = 0
         for line in file:
-            # print(line.strip())
             if self.getter(line.strip()) == 1:
                 matches += 1
                 samat.append(line.strip())
-                # print(samat)
-            # time.sleep(0.1)
         file2 = open("matches.txt", "w", encoding="utf-8")
         for item in samat:
             file2.write(str(item)+"\n")
         print("MATCHING WORDS:", matches)
 
     def writeToFile(self, init, add, comp, runtime_total):
-        file = open("compareRuntime.txt", "a", encoding="utf-8")
+        file = open("compareRuntimeHash.txt", "a", encoding="utf-8")
         file.write("ACTION       |   RUNTIME(s)\n")
         file.write("-------------|----------------\n")
         file.write("Table init   |"+str("%.8f" % init)+"\n")
@@ -98,7 +95,7 @@ class HashTable:
         file.write("Compare      |"+str("%.8f" % comp)+"\n")
         file.write("-------------|----------------\n")
         file.write("Total runtime: "+str("%.8f" % runtime_total))
-        file.write("\nTable size: " + str(self.SIZE))
+        file.write("\nTable size: " + str(self.SIZE) + "\n")
 
 
 runtime_total = 0
