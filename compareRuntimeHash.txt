@@ -1,0 +1,16 @@
+ACTION       |   RUNTIME(s)
+-------------|----------------
+Table init   |0.00000000
+Add to table |2.79099917
+Compare      |0.96204042
+-------------|----------------
+Total runtime: 3.75303960
+Table size: 10000
+ACTION       |   RUNTIME(s)
+-------------|----------------
+Table init   |0.00100040
+Add to table |2.92945862
+Compare      |1.05099893
+-------------|----------------
+Total runtime: 3.98145795
+Table size: 10000
