@@ -95,6 +95,17 @@ class HashTable:
             for elem in line:
                 file.write(str(elem)+"\n")
 
+    def writeOrdered(self):
+        words = []
+        file = open("hashOrdered.txt", "w", encoding="utf-8")
+        for line in self.arr:
+            for elem in line:
+                words.append(elem)
+        words.sort()
+        for elem in words:
+            file.write(str(elem)+"\n")
+
 
 t = HashTable(100000)
 t.addFromFile()
+t.writeOrdered()
