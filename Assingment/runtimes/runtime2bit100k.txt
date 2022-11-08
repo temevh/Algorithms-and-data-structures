@@ -1,0 +1,84 @@
+
+
+ACTION       |   RUNTIME(s)
+-------------|----------------
+Table init   |0.00735188
+Add to table |0.78161454
+Compare      |0.22342896
+-------------|----------------
+Total runtime: 1.01239538
+Table size: 100000
+ACTION       |   RUNTIME(s)
+-------------|----------------
+Table init   |0.00695395
+Add to table |0.76035094
+Compare      |0.22674131
+-------------|----------------
+Total runtime: 0.99404621
+Table size: 100000
+ACTION       |   RUNTIME(s)
+-------------|----------------
+Table init   |0.00681591
+Add to table |0.77819610
+Compare      |0.22832489
+-------------|----------------
+Total runtime: 1.01333690
+Table size: 100000
+ACTION       |   RUNTIME(s)
+-------------|----------------
+Table init   |0.00682783
+Add to table |0.75158525
+Compare      |0.22039080
+-------------|----------------
+Total runtime: 0.97880387
+Table size: 100000
+ACTION       |   RUNTIME(s)
+-------------|----------------
+Table init   |0.00703835
+Add to table |0.74584413
+Compare      |0.22111201
+-------------|----------------
+Total runtime: 0.97399449
+Table size: 100000
+ACTION       |   RUNTIME(s)
+-------------|----------------
+Table init   |0.00685716
+Add to table |0.77225018
+Compare      |0.22394180
+-------------|----------------
+Total runtime: 1.00304914
+Table size: 100000
+ACTION       |   RUNTIME(s)
+-------------|----------------
+Table init   |0.00668430
+Add to table |0.77453399
+Compare      |0.22985291
+-------------|----------------
+Total runtime: 1.01107121
+Table size: 100000
+ACTION       |   RUNTIME(s)
+-------------|----------------
+Table init   |0.00798249
+Add to table |0.85298204
+Compare      |0.26602125
+-------------|----------------
+Total runtime: 1.12698579
+Table size: 100000
+ACTION       |   RUNTIME(s)
+-------------|----------------
+Table init   |0.01014757
+Add to table |0.92546272
+Compare      |0.25772452
+-------------|----------------
+Total runtime: 1.19333482
+Table size: 100000
+ACTION       |   RUNTIME(s)
+-------------|----------------
+Table init   |0.00925350
+Add to table |0.80812716
+Compare      |0.26460528
+-------------|----------------
+Total runtime: 1.08198595
+Table size: 100000
+
+Average runtime: 1.0389003760000002s
