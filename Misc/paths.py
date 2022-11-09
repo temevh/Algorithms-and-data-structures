@@ -1,9 +1,6 @@
-import math
-
-
 def paths(n, a, b):
-    if (a + b) > n:
-        return 0
+    if (a <= n or b <= a):
+        return -1
 
 
 if __name__ == "__main__":
