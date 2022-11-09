@@ -1,12 +1,12 @@
 def jumps(n, a, b):
     nums = [a, b]
-    dynamic = [0] * (n + 1)
-    dynamic[0] = 1
-    for i in range(1, n+1):
-        for j in nums:
-            if i >= j:
-                dynamic[i] += dynamic[i-j]
-    return dynamic[-1]
+    values = [0] * (n+1)
+    values[0] = 1
+    for i in range(n+1):
+        for num in nums:
+            if i >= num:
+                values[i] += values[i-num]
+    return values[-1]
 
 
 if __name__ == "__main__":
