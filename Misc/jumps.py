@@ -1,9 +1,12 @@
 def jumps(n, a, b):
-    if a < n and b > n:
-        return -1
-    if a == n or b == n:
+    values = [0] * n
+    if n in (a, b):
         return 1
-    return (jumps(n-1, a, b) + jumps(n-2, a, b))
+    if n < a and n < b:
+        return 0
+    if values[n-1] == 0:
+        values[n-1] = jumps(n-a, a, b) + jumps(n-b, a, b)
+    return values[n-1]
 
 
 if __name__ == "__main__":
