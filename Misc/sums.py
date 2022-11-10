@@ -1,4 +1,26 @@
 def sums(items):
+    arr = helper(items)
+    toReturn = []
+    arr.pop(0)
+    summa = 0
+    for elem in arr:
+        summa = sum(elem)
+        if summa not in toReturn:
+            toReturn.append(summa)
+    return len(toReturn)
+
+
+def helper(items):
+    res = [[]]
+
+    for i in range(len(items)):
+        for num in res[:]:
+            tmp = [items[i]] + num
+            tmp.sort()
+            if (tmp not in res):
+                res.append(tmp)
+    res.sort()
+    return res
 
 
 if __name__ == "__main__":
