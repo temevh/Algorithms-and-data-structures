@@ -1,26 +1,18 @@
 def sums(items):
-    arr = helper(items)
+    arr = [[]]
     toReturn = []
-    arr.pop(0)
-    summa = 0
-    for elem in arr:
-        summa = sum(elem)
-        if summa not in toReturn:
-            toReturn.append(summa)
-    return len(toReturn)
-
-
-def helper(items):
-    res = [[]]
-
     for i in range(len(items)):
-        for num in res[:]:
+        for num in arr[:]:
             tmp = [items[i]] + num
             tmp.sort()
-            if (tmp not in res):
-                res.append(tmp)
-    res.sort()
-    return res
+            if (tmp not in toReturn):
+                arr.append(tmp)
+    arr.sort()
+    for item in arr:
+        summa = sum(item)
+        if summa not in toReturn:
+            toReturn.append(summa)
+    return len(toReturn)-1
 
 
 if __name__ == "__main__":
