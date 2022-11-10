@@ -4,15 +4,10 @@ def sums(items):
     for i in range(len(items)):
         for num in arr[:]:
             tmp = [items[i]] + num
-            tmp.sort()
-            if (tmp not in toReturn):
-                arr.append(tmp)
-    arr.sort()
-    for item in arr:
-        summa = sum(item)
-        if summa not in toReturn:
-            toReturn.append(summa)
-    return len(toReturn)-1
+            arr.append(tmp)
+            toReturn.append(sum(tmp))
+    toReturn = list(dict.fromkeys(toReturn))
+    return len(toReturn)
 
 
 if __name__ == "__main__":
