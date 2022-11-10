@@ -6,8 +6,7 @@ def sums(items):
             tmp = [items[i]] + num
             arr.append(tmp)
             toReturn.append(sum(tmp))
-    toReturn = list(dict.fromkeys(toReturn))
-    return len(toReturn)
+    return len(list(dict.fromkeys(toReturn)))
 
 
 if __name__ == "__main__":
