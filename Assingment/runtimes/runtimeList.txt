@@ -1,4 +1,4 @@
-10 runs (ubuntu) 
+10 runs (ubuntu) using a default python array
 
 ACTION       |   RUNTIME(s)
 -------------|----------------
