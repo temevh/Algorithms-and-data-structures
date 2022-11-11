@@ -65,6 +65,7 @@ class HashTable:
         for line in file:
             # Pass the word from the file to the hash table, removing the newline(\n)
             self.adder(line.strip())
+    #test
 
     def printTable(self):
         print("INDEX|ARRAY")  # Create a grid with the hearders INDEX and ARRAY
