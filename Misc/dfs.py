@@ -4,6 +4,7 @@ print("The adjacency List representing the graph is:")
 print(graph)
 
 
+'''
 def dfs(graph, source):
     S = list()
     visited_vertices = list()
@@ -16,7 +17,17 @@ def dfs(graph, source):
             if u not in visited_vertices:
                 S.append(u)
                 visited_vertices.append(u)
+'''
+
+
+def dfs(graph, vertex, path=[]):
+    path += [vertex]
+    for n in graph[vertex]:
+        if n not in path:
+            path = dfs(graph, n, path)
+
+    return path
 
 
 print("DFS traversal of graph with source 0 is:")
-dfs(graph, 0)
+print(dfs(graph, 0))
