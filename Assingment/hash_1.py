@@ -48,16 +48,16 @@ class HashTable:
         key = str(key)
         spot = ""  # A placeholder variable for the potential info that is to be returned if the given key is found
         h = self.hasher(key)  # Calculate the hash
-        print("Etsittävä hash ", h)
+        #print("Etsittävä hash ", h)
         i = 0
         # loop through the linked list at the given index(hash)
         for element in self.arr[h]:
-            print(element)
+            # print(element)
             i += 1
             if element == key:  # If the current loop element matches the key to be searched for
-                spot = "Key found\nKey hash: " + \
+                spot = "Key ["+str(key) + "] found\nKey hash: " + \
                     str(h) + "\nKey is the " + str(i) + \
-                    " nth element in list " + str(h)
+                    ". element in list " + str(h+1)
                 return spot  # Add information to the spot variable, return it
         else:
             print("key not found")  # If key not found, return "key not found"
@@ -88,6 +88,8 @@ class HashTable:
         file = open("hashResult.txt", "w", encoding="utf-8")
         for element in self.arr:
             file.write(str(element)+"\n")
+        file.close()
+        print("hash table written to file hashResult.txt")
 
     # A function to print each hash table element on its own line to help with troubleshooting etc.
     def writeToFile2(self):
