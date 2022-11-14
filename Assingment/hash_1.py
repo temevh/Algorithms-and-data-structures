@@ -35,7 +35,7 @@ class HashTable:
         found = False  # Set found to false, found is used to check if key already exists, thus not allowing duplicates
         # By using enumerate, we can implement a counter in the loop (index)
         for index, element in enumerate(self.arr[h]):
-            # If the length of the element is 2 and the current element is key
+            # If the key is already in the table
             if len(element) == 2 and element[0] == key:
                 self.arr[h][index] = key
                 found = True  # Set found to true
@@ -48,17 +48,18 @@ class HashTable:
         key = str(key)
         spot = ""  # A placeholder variable for the potential info that is to be returned if the given key is found
         h = self.hasher(key)  # Calculate the hash
-        #print("Etsittävä hash ", h)
+        # print("Etsittävä hash ", h)
         i = 0
         # loop through the linked list at the given index(hash)
         for element in self.arr[h]:
             # print(element)
             i += 1
             if element == key:  # If the current loop element matches the key to be searched for
-                spot = "Key ["+str(key) + "] found\nKey hash: " + \
-                    str(h) + "\nKey is the " + str(i) + \
-                    ". element in list " + str(h+1)
-                return spot  # Add information to the spot variable, return it
+                # spot = "Key ["+str(key) + "] found\nKey hash: " + \
+                # str(h) + "\nKey is the " + str(i) + \
+                # ". element in list " + str(h+1)
+                # return spot  # Add information to the spot variable, return it
+                return "key found"
         else:
             print("key not found")  # If key not found, return "key not found"
 
@@ -91,13 +92,14 @@ class HashTable:
         file.close()
         print("hash table written to file hashResult.txt")
 
-    # A function to print each hash table element on its own line to help with troubleshooting etc.
+    # A function to write each hash table element on its own line to help with troubleshooting etc.
     def writeToFile2(self):
         file = open("hashResult.txt", "w", encoding="utf-8")
         for line in self.arr:
             for elem in line:
                 file.write(str(elem)+"\n")
 
+    # A function to write each hash table element in a sorted order to help with troubleshooting
     def writeOrdered(self):
         words = []
         file = open("hashOrdered.txt", "w", encoding="utf-8")
@@ -109,8 +111,11 @@ class HashTable:
             file.write(str(elem)+"\n")
 
 
+st = time.time()
 t = HashTable(10000)  # Initialize hash table with size 10 000
 t.addFromFile()  # Add words from kaikkisanat.txt to the hash table
 # Seach for the word "kirkkoväki" from the hash table
 print(t.getter("kirkkoväki"))
-t.writeToFile()  # Write
+et = time.time()
+print("Total runtime: ", et-st)
+t.writeToFile()  # Write the complete hash table to file
