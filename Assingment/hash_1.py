@@ -6,7 +6,6 @@
 # Worst case O(n) if all keys have the same hash, essentially the program goes through a linked list, and the complexity for list look-ups is O(n)
 # Duplicates not allowed
 
-
 import time
 
 
@@ -108,7 +107,8 @@ class HashTable:
             file.write(str(elem)+"\n")
 
 
-t = HashTable(10000)
-t.addFromFile()
+t = HashTable(10000)  # Initialize hash table with size 10 000
+t.addFromFile()  # Add words from kaikkisanat.txt to the hash table
+# Seach for the word "kirkkoväki" from the hash table
 print(t.getter("kirkkoväki"))
-t.writeToFile()
+t.writeToFile()  # Write
