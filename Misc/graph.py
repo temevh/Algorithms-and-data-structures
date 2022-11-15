@@ -1,5 +1,3 @@
-# https://www.askpython.com/python/examples/depth-first-search-in-a-graph
-# https://www.codingninjas.com/codestudio/library/implementation-of-dfs-using-adjacency-matrix
 from queue import Queue
 
 
@@ -22,13 +20,6 @@ class Graph():
             k += 1
         return converted
 
-    def dfs(self, graph, start, path=[]):
-        path += [start]
-        for elem in graph[start]:
-            if elem not in path:
-                path = self.dfs(graph, elem, path)
-        return path
-
     def df_print(self, start):
 
         graph = self.convert(self.matrix)
@@ -36,6 +27,13 @@ class Graph():
         for elem in df:
             print(elem, end=" ")
         print()
+
+    def dfs(self, graph, start, path=[]):
+        path += [start]
+        for elem in graph[start]:
+            if elem not in path:
+                path = self.dfs(graph, elem, path)
+        return path
 
     def bf_print(self, start):
         graph = self.convert(self.matrix)
@@ -46,16 +44,16 @@ class Graph():
 
     def bfs(self, graph, source):
         toReturn = []
-        que = Queue()
+        q = Queue()
         visited = set()
-        que.put(source)
+        q.put(source)
         visited.update({0})
-        while not que.empty():
-            vertex = que.get()
+        while not q.empty():
+            vertex = q.get()
             toReturn.append(vertex)
             for elem in graph[vertex]:
                 if elem not in visited:
-                    que.put(elem)
+                    q.put(elem)
                     visited.update({elem})
         return toReturn
 
