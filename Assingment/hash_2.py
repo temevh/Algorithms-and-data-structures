@@ -91,6 +91,7 @@ class HashTable:
 
 
 t = HashTable(3)
+t.printTable()
 t.adder(12)
 t.adder('hashtable')
 t.adder(1234)

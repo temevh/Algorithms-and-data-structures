@@ -55,11 +55,11 @@ class HashTable:
             # print(element)
             i += 1
             if element == key:  # If the current loop element matches the key to be searched for
-                # spot = "Key ["+str(key) + "] found\nKey hash: " + \
-                # str(h) + "\nKey is the " + str(i) + \
-                # ". element in list " + str(h+1)
-                # return spot  # Add information to the spot variable, return it
-                return "key found"
+                spot = "Key ["+str(key) + "] found\nKey hash: " + \
+                    str(h) + "\nKey is the " + str(i) + \
+                    ". element in list " + str(h+1)
+                return spot  # Add information to the spot variable, return it
+                # return "key found"
         else:
             print("key not found")  # If key not found, return "key not found"
 
