@@ -16,20 +16,21 @@ class Graph():
                 if i != 0:
                     converted[k].append(elem.index(i))
             k += 1
-        print(converted)
+        return converted
+
+    def dfs(self, graph, vertex, path=[]):
+        path += [vertex]
+        for n in graph[vertex]:
+            if n not in path:
+                path = self.dfs(graph, n, path)
+        return path
 
     def df_print(self, start):
         # adjency matrix -> adjency list
         graph = self.convert(self.matrix)
-        print(graph)
-
-    def df_help(self, graph, vertex, path=[]):
-        path += [vertex]
-        for n in graph[vertex]:
-            if n not in path:
-                path = self.df_help(graph, n, path)
-
-        return path
+        df = self.dfs(graph, start)
+        for elem in df:
+            print(elem, end=" ")
 
     def bf_print(self, start):
         pass
