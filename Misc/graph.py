@@ -8,6 +8,7 @@ class Graph():
         self.matrix = grid
 
     def convert(self, a):
+        # adjadency matrix -> adjadency list
         converted = {}
         i = 0
         for j in range(len(a)):
@@ -21,15 +22,15 @@ class Graph():
             k += 1
         return converted
 
-    def dfs(self, graph, vertex, path=[]):
-        path += [vertex]
-        for n in graph[vertex]:
-            if n not in path:
-                path = self.dfs(graph, n, path)
+    def dfs(self, graph, start, path=[]):
+        path += [start]
+        for elem in graph[start]:
+            if elem not in path:
+                path = self.dfs(graph, elem, path)
         return path
 
     def df_print(self, start):
-        # adjency matrix -> adjency list
+
         graph = self.convert(self.matrix)
         df = self.dfs(graph, start)
         for elem in df:
@@ -41,6 +42,7 @@ class Graph():
         bf = self.bfs(graph, start)
         for elem in bf:
             print(elem, end=" ")
+        print()
 
     def bfs(self, graph, source):
         toReturn = []
@@ -58,7 +60,10 @@ class Graph():
         return toReturn
 
     def weight(self, v1, v2):
-        pass
+        if self.matrix[v1][v2] != 0:
+            return (self.matrix[v1][v2])
+        else:
+            return -1
 
 
 if __name__ == "__main__":
@@ -74,9 +79,10 @@ if __name__ == "__main__":
     ]
     x = {0: [2, 4], 1: [], 2: [1, 3, 5],
          3: [0, 5], 4: [5], 5: [1]}
+
     graph = Graph(matrix)
 
     graph.df_print(0)           # 0 2 1 3 5 4
     graph.bf_print(0)           # 0 2 4 1 3 5
-    # print(graph.weight(0, 2))   # 7
-    # print(graph.weight(3, 4))   # -1
+    print(graph.weight(0, 2))   # 7
+    print(graph.weight(3, 4))   # -1
