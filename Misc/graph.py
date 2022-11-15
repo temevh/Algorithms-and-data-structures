@@ -1,5 +1,8 @@
 # https://www.askpython.com/python/examples/depth-first-search-in-a-graph
 # https://www.codingninjas.com/codestudio/library/implementation-of-dfs-using-adjacency-matrix
+from queue import Queue
+
+
 class Graph():
     def __init__(self, grid):
         self.matrix = grid
@@ -31,9 +34,29 @@ class Graph():
         df = self.dfs(graph, start)
         for elem in df:
             print(elem, end=" ")
+        print()
 
     def bf_print(self, start):
-        pass
+        graph = self.convert(self.matrix)
+        bf = self.bfs(graph, start)
+        for elem in bf:
+            print(elem, end=" ")
+
+    def bfs(self, graph, source):
+        toReturn = []
+        Q = Queue()
+        visited_vertices = set()
+        Q.put(source)
+        visited_vertices.update({0})
+        while not Q.empty():
+            vertex = Q.get()
+            #print(vertex, end="-->")
+            toReturn.append(vertex)
+            for u in graph[vertex]:
+                if u not in visited_vertices:
+                    Q.put(u)
+                    visited_vertices.update({u})
+        return toReturn
 
     def weight(self, v1, v2):
         pass
@@ -55,6 +78,6 @@ if __name__ == "__main__":
     graph = Graph(matrix)
 
     graph.df_print(0)           # 0 2 1 3 5 4
-    # graph.bf_print(0)           # 0 2 4 1 3 5
+    graph.bf_print(0)           # 0 2 4 1 3 5
     # print(graph.weight(0, 2))   # 7
     # print(graph.weight(3, 4))   # -1
