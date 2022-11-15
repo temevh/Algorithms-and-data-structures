@@ -44,18 +44,17 @@ class Graph():
 
     def bfs(self, graph, source):
         toReturn = []
-        Q = Queue()
-        visited_vertices = set()
-        Q.put(source)
-        visited_vertices.update({0})
-        while not Q.empty():
-            vertex = Q.get()
-            #print(vertex, end="-->")
+        que = Queue()
+        visited = set()
+        que.put(source)
+        visited.update({0})
+        while not que.empty():
+            vertex = que.get()
             toReturn.append(vertex)
-            for u in graph[vertex]:
-                if u not in visited_vertices:
-                    Q.put(u)
-                    visited_vertices.update({u})
+            for elem in graph[vertex]:
+                if elem not in visited:
+                    que.put(elem)
+                    visited.update({elem})
         return toReturn
 
     def weight(self, v1, v2):
