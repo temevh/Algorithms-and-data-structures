@@ -5,28 +5,23 @@ class Graph():
         self.matrix = grid
 
     def convert(self, a):
-        toReturn = {}
+        converted = {}
         i = 0
         for j in range(len(a)):
-            toReturn[i] = []
+            converted[i] = []
             i += 1
-
-        # print(toReturn)
         k = 0
         for elem in a:
             for i in elem:
                 if i != 0:
-                    toReturn[k].append(elem.index(i))
+                    converted[k].append(elem.index(i))
             k += 1
-        print(toReturn)
+        print(converted)
 
     def df_print(self, start):
         # adjency matrix -> adjency list
         graph = self.convert(self.matrix)
-        # print(graph)
-
-        #toReturn = self.df_help(self.matrix, start, path=[])
-        # print(toReturn)
+        print(graph)
 
     def df_help(self, graph, vertex, path=[]):
         path += [vertex]
@@ -55,7 +50,7 @@ if __name__ == "__main__":
         [0, 6, 0, 0, 0, 0]  # 5
     ]
     x = {0: [2, 4], 1: [], 2: [1, 3, 5],
-         3: [0, 5], 4: [5], 5: [2]}
+         3: [0, 5], 4: [5], 5: [1]}
     graph = Graph(matrix)
 
     graph.df_print(0)           # 0 2 1 3 5 4
