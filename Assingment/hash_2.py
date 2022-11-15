@@ -43,7 +43,7 @@ class HashTable:
         if not found:  # Else if the loop does not encounter the key
             # Add the key to the given list at the array
             self.arr[h].append(key)
-        self.printTable()
+        # self.printTable()
 
     def getter(self, key):
         key = str(key)
@@ -89,10 +89,20 @@ class HashTable:
             file.write(str(i) + str("    | ")+str(self.arr[i])+"\n")
         file.write("-----------------")
 
+    def writeToFile2(self, runtime):
+        file = open("addwordhash.txt", "a", encoding="utf-8")
+        file.write(str(runtime))
+        file.write("\n")
+        file.close
+
 
 t = HashTable(3)
 t.printTable()
+st = time.time()
 t.adder(12)
+et = time.time()
+# t.writeToFile2(et-st)
+print("Time to add new value to table:", et-st)
 t.adder('hashtable')
 t.adder(1234)
 t.adder(4328989)
