@@ -2,27 +2,16 @@ from graph import Graph
 
 
 def dijkstragraph(graph, start):
-    # Initialize visited array/stack to "infinity"
-    graph.visited = [1000000] * graph.v
-    graph.visited[start] = 0
-    for i in range(0, graph.v):
-        value = minvertex(graph)
-        graph[value] = "VISITED"
-        if graph.visited[value] == 1000000:
-            return
+    graph.D = [10000000000000] * len(graph.matrix)
 
 
-def minvertex(graph):
-    value = 0
-    for i in range(0, graph.v):
-        if graph.visited[i] != "VISITED":
-            value = i
+def minvertex(G, D=[]):
+    v = 0
+    i = 0
+    while i < len(graph.matrix):
+        if graph.visited[i] != True:
+            v = i
             break
-    for i in range(0, graph.v):
-        if graph.visited[i] != "VISITED" and graph.visited[i] < graph.visited[value]:
-            value = i
-
-    return value
 
 
 if __name__ == "__main__":
@@ -41,6 +30,7 @@ if __name__ == "__main__":
     ]
 
     graph = Graph(matrix)
+
     new_graph = dijkstragraph(graph, 0)
     # new_graph.df_print(0)           # 0 1 2 3 4 5 6 7 9 8
     # new_graph.bf_print(0)           # 0 1 2 3 4 5 6 7 8 9
