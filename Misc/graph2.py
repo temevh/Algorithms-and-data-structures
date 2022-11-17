@@ -1,5 +1,4 @@
-import queue
-
+# Based on lecture material and openDSA 19.3
 
 class Graph:
     def __init__(self, grid):
@@ -18,17 +17,17 @@ class Graph:
         self.postVisit(v)
 
     def bf_print(self, v):
-        Q = queue.Queue(len(self.matrix))
-        Q.put(v)
+        Q = []
+        Q.insert(0, v)
         self.visited[v] = True
-        while Q.qsize() > 0:
-            v = Q.get(v)
+        while len(Q) > 0:
+            v = Q.pop()
             self.preVisit(v)
             nList = self.neighbors(v)
-            for i in range(0, len(nList)):
+            for i in range(len(nList)):
                 if self.visited[nList[i]] != True:
                     self.visited[nList[i]] = True
-                    Q.get(nList[i])
+                    Q.remove(nList[i])
         self.postVisit(v)
 
     def preVisit(self, v):
