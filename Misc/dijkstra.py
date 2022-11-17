@@ -1,17 +1,33 @@
 from graph import Graph
 
 
-def dijkstragraph(graph, start):
-    graph.D = [10000000000000] * len(graph.matrix)
+def dijkstragraph(graph, s):
+    graph.D = [100000000000] * len(graph.matrix)
+    graph.D[s] = 0
+    for i in range(len(graph.matrix)):
+        v = minvertex(graph, graph.D)
+        graph.visited[v] = True
+        if graph.D[v] == 100000000000:
+            return
+        nList = graph.neighbors(v)
+        j = 0
+        while j < len(nList):
+            w = nList[j]
+            if graph.D[w] > (graph.D[v] + graph.weight(v, w)):
+                graph.D[w] = graph.D[v] + graph.weight(v, w)
 
 
-def minvertex(G, D=[]):
+def minvertex(G, D):
     v = 0
-    i = 0
-    while i < len(graph.matrix):
+    for i in range(len(graph.matrix)):
         if graph.visited[i] != True:
             v = i
             break
+    for i in range(len(graph.matrix)):
+        if graph.visited[i] != True and D[i] < D[v]:
+            v = i
+
+    return v
 
 
 if __name__ == "__main__":
@@ -32,7 +48,7 @@ if __name__ == "__main__":
     graph = Graph(matrix)
 
     new_graph = dijkstragraph(graph, 0)
-    # new_graph.df_print(0)           # 0 1 2 3 4 5 6 7 9 8
+    new_graph.df_print(0)           # 0 1 2 3 4 5 6 7 9 8
     # new_graph.bf_print(0)           # 0 1 2 3 4 5 6 7 8 9
     # print(new_graph.weight(3, 6))   # 4
     # print(new_graph.weight(5, 8))   # -1
