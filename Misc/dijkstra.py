@@ -3,12 +3,12 @@ from graph import Graph
 
 
 def dijkstragraph(graph, s):
-    graph.D = [100000000000] * len(graph.matrix)
+    graph.D = [100000000000000000] * len(graph.matrix)
     graph.D[s] = 0
     for i in range(len(graph.matrix)):
         v = minvertex()
         graph.visited[v] = True
-        if graph.D[v] == 100000000000:
+        if graph.D[v] == 100000000000000000:
             return
         nList = graph.neighbors(v)
         j = 0
@@ -22,13 +22,14 @@ def dijkstragraph(graph, s):
 
 def minvertex():
     v = 0
+
     for i in range(len(graph.matrix)):
         if graph.visited[i] != True:
             v = i
             break
-    for i in range(len(graph.matrix)):
-        if graph.visited[i] != True and graph.D[i] < graph.D[v]:
-            v = i
+    for j in range(len(graph.matrix)):
+        if (graph.visited[j] != True) and (graph.D[j] < graph.D[v]):
+            v = j
 
     return v
 
@@ -49,10 +50,9 @@ if __name__ == "__main__":
     ]
 
     graph = Graph(matrix)
-
     new_graph = dijkstragraph(graph, 0)
     new_graph.df_print(0)           # 0 1 2 3 4 5 6 7 9 8
     print()
-    new_graph.bf_print(0)           # 0 1 2 3 4 5 6 7 8 9
+    # new_graph.bf_print(0)           # 0 1 2 3 4 5 6 7 8 9
     # print(new_graph.weight(3, 6))   # 4
     # print(new_graph.weight(5, 8))   # -1
