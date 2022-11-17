@@ -1,26 +1,29 @@
-# Neighbors
-# Post/previsit
-
 class Graph:
     def __init__(self, grid):
         self.matrix = grid
-        #self.visited = [False] * len(grid)
-        self.visited = [0] * len(self.matrix)
-        self.vertex_count = len(self.matrix)
+        self.visited = [False] * len(self.matrix)
+        self.stack = []
 
     def df_print(self, v):
         self.preVisit(v)
-        #self.matrix[v] = True
+        self.visited[v] = True
+        print(str(v)+" ", end="")
         nList = self.neighbors(v)
+        for i in range(len(nList)):
+            if self.visited[nList[i]] != True:
+                self.df_print(nList[i])
+        self.postVisit(v)
 
     def bf_print(self, v):
-        pass
+        Q = []
+        Q.append(v)
+        self.visited[v] = True
 
     def preVisit(self, v):
-        self.visited[v] = False
+        self.stack.append(v)
 
     def postVisit(self, v):
-        self.visited[v] = True
+        self.stack.remove(v)
 
     def neighbors(self, v):
         nList = []
