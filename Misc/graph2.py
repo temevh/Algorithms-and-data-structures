@@ -1,3 +1,6 @@
+import queue
+
+
 class Graph:
     def __init__(self, grid):
         self.matrix = grid
@@ -15,9 +18,18 @@ class Graph:
         self.postVisit(v)
 
     def bf_print(self, v):
-        Q = []
-        Q.append(v)
+        Q = queue.Queue(len(self.matrix))
+        Q.put(v)
         self.visited[v] = True
+        while Q.qsize() > 0:
+            v = Q.get(v)
+            self.preVisit(v)
+            nList = self.neighbors(v)
+            for i in range(0, len(nList)):
+                if self.visited[nList[i]] != True:
+                    self.visited[nList[i]] = True
+                    Q.get(nList[i])
+        self.postVisit(v)
 
     def preVisit(self, v):
         self.stack.append(v)
