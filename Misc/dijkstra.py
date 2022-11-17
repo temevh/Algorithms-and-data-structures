@@ -1,3 +1,4 @@
+# Based on lecture material and openDSA 19.5
 from graph import Graph
 
 
@@ -5,7 +6,7 @@ def dijkstragraph(graph, s):
     graph.D = [100000000000] * len(graph.matrix)
     graph.D[s] = 0
     for i in range(len(graph.matrix)):
-        v = minvertex(graph, graph.D)
+        v = minvertex()
         graph.visited[v] = True
         if graph.D[v] == 100000000000:
             return
@@ -15,16 +16,18 @@ def dijkstragraph(graph, s):
             w = nList[j]
             if graph.D[w] > (graph.D[v] + graph.weight(v, w)):
                 graph.D[w] = graph.D[v] + graph.weight(v, w)
+            j += 1
+    return graph
 
 
-def minvertex(G, D):
+def minvertex():
     v = 0
     for i in range(len(graph.matrix)):
         if graph.visited[i] != True:
             v = i
             break
     for i in range(len(graph.matrix)):
-        if graph.visited[i] != True and D[i] < D[v]:
+        if graph.visited[i] != True and graph.D[i] < graph.D[v]:
             v = i
 
     return v
@@ -49,6 +52,7 @@ if __name__ == "__main__":
 
     new_graph = dijkstragraph(graph, 0)
     new_graph.df_print(0)           # 0 1 2 3 4 5 6 7 9 8
-    # new_graph.bf_print(0)           # 0 1 2 3 4 5 6 7 8 9
+    print()
+    new_graph.bf_print(0)           # 0 1 2 3 4 5 6 7 8 9
     # print(new_graph.weight(3, 6))   # 4
     # print(new_graph.weight(5, 8))   # -1
