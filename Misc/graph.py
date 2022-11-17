@@ -1,65 +1,53 @@
-from queue import Queue
+# Based on lecture material and openDSA 19.3
 
-
-class Graph():
+class Graph:
     def __init__(self, grid):
         self.matrix = grid
+        self.visited = [False] * len(self.matrix)
+        self.stack = []
 
-    def convert(self, a):
-        # adjadency matrix -> adjadency list
-        converted = {}
-        i = 0
-        for j in range(len(a)):
-            converted[i] = []
-            i += 1
-        k = 0
-        for elem in a:
-            for i in elem:
-                if i != 0:
-                    converted[k].append(elem.index(i))
-            k += 1
-        return converted
+    def df_print(self, v):
+        self.preVisit(v)
+        self.visited[v] = True
+        print(str(v)+" ", end="")
+        nList = self.neighbors(v)
+        for i in range(len(nList)):
+            if self.visited[nList[i]] != True:
+                self.df_print(nList[i])
+        self.postVisit(v)
 
-    def df_print(self, start):
+    def bf_print(self, v):
+        Q = []
+        Q.insert(0, v)  # Enqueue
+        self.visited[v] = True
+        while len(Q) > 0:
+            v = Q.pop()  # Dequeue
+            print(str(v)+" ", end="")
+            self.preVisit(v)
+            nList = self.neighbors(v)
+            for i in range(len(nList)):
+                if self.visited[nList[i]] != True:
+                    self.visited[nList[i]] = True
+                    Q.insert(0, nList[i])  # Enqueue
+        self.postVisit(v)
 
-        graph = self.convert(self.matrix)
-        df = self.dfs(graph, start)
-        for elem in df:
-            print(elem, end=" ")
-        print()
+    def preVisit(self, v):
+        self.stack.append(v)
 
-    def dfs(self, graph, start, path=[]):
-        path += [start]
-        for elem in graph[start]:
-            if elem not in path:
-                path = self.dfs(graph, elem, path)
-        return path
+    def postVisit(self, v):
+        self.stack.remove(v)
 
-    def bf_print(self, start):
-        graph = self.convert(self.matrix)
-        bf = self.bfs(graph, start)
-        for elem in bf:
-            print(elem, end=" ")
-        print()
+    def neighbors(self, v):
+        nList = []
+        nums = self.matrix[v]
+        for i in nums:
+            if i != 0:
+                nList.append(nums.index(i))
+        return nList
 
-    def bfs(self, graph, source):
-        toReturn = []
-        q = Queue()
-        visited = set()
-        q.put(source)
-        visited.update({0})
-        while not q.empty():
-            vertex = q.get()
-            toReturn.append(vertex)
-            for elem in graph[vertex]:
-                if elem not in visited:
-                    q.put(elem)
-                    visited.update({elem})
-        return toReturn
-
-    def weight(self, v1, v2):
-        if self.matrix[v1][v2] != 0:
-            return (self.matrix[v1][v2])
+    def weight(self, a, b):
+        if self.matrix[a][b] != 0:
+            return (self.matrix[a][b])
         else:
             return -1
 
@@ -75,8 +63,6 @@ if __name__ == "__main__":
         [0, 0, 0, 0, 0, 1],  # 4
         [0, 6, 0, 0, 0, 0]  # 5
     ]
-    x = {0: [2, 4], 1: [], 2: [1, 3, 5],
-         3: [0, 5], 4: [5], 5: [1]}
 
     graph = Graph(matrix)
 
