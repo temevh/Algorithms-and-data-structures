@@ -7,6 +7,7 @@ class Graph:
         self.stack = []
 
     def df_print(self, v):
+        self.checker()
         self.preVisit(v)
         self.visited[v] = True
         print(str(v)+" ", end="")
@@ -16,7 +17,15 @@ class Graph:
                 self.df_print(nList[i])
         self.postVisit(v)
 
+    def checker(self):
+        result = False
+        if len(self.visited) > 0:
+            result = all(elem == self.visited[0] for elem in self.visited)
+        if result:
+            self.visited = [False] * len(self.matrix)
+
     def bf_print(self, v):
+        self.checker()
         Q = []
         Q.insert(0, v)  # Enqueue
         self.visited[v] = True
