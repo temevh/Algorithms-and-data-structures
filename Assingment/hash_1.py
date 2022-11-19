@@ -111,11 +111,18 @@ class HashTable:
             file.write(str(elem)+"\n")
 
 
-st = time.time()
-t = HashTable(10000)  # Initialize hash table with size 10 000
-t.addFromFile()  # Add words from kaikkisanat.txt to the hash table
+st = time.time()  # Initialize start time to system time
+t = HashTable(100)  # Initialize hash table with size 10 000
+# t.addFromFile()  # Add words from kaikkisanat.txt to the hash table
 # Seach for the word "kirkkoväki" from the hash table
+t.adder(1254121)
+t.adder("testi")
+t.adder("AAAAAAAAAA")
+t.adder("R4PORPIHREHR")
+t.adder("rthkke+e")
+t.adder(15001)
+t.adder("kirkkoväki")
 print(t.getter("kirkkoväki"))
-et = time.time()
-print("Total runtime: ", et-st)
+et = time.time()  # Initialize end time to system time
+print("Total runtime: ", str(et-st)+"s")
 t.writeToFile()  # Write the complete hash table to file
