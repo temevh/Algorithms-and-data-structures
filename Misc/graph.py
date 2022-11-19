@@ -34,18 +34,19 @@ class Graph:
 
     def bf_print(self, v):
         Q = []
-        Q.insert(0, v)  # Enqueue
-        # Q.append(v)
+        # Q.insert(0, v)  # Enqueue
+        Q.append(v)
         self.visited[v] = True
         while len(Q) > 0:
-            v = Q.pop()  # Dequeue
+            v = Q.pop(0)  # Dequeue
             self.preVisit(v)
             nList = self.neighbors(v)
             for i in range(len(nList)):
                 if self.visited[nList[i]] != True:
                     self.visited[nList[i]] = True
-                    Q.insert(0, nList[i])  # Enqueue
-        self.postVisit(v)
+                    # Q.insert(0, nList[i])  # Enqueue
+                    Q.append(nList[i])
+            self.postVisit(v)
         if len(self.stack) == 0:
             replace = [False] * len(self.matrix)
             self.visited = replace
