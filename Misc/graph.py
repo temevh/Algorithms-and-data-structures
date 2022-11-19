@@ -9,7 +9,6 @@ class Graph:
         self.D = []
 
     def df_print(self, v):
-        self.checker()
         self.preVisit(v)
         self.visited[v] = True
         print(str(v)+" ", end="")
@@ -18,16 +17,11 @@ class Graph:
             if self.visited[nList[i]] != True:
                 self.df_print(nList[i])
         self.postVisit(v)
-
-    def checker(self):
-        result = False
-        if len(self.visited) > 0:
-            result = all(elem == self.visited[0] for elem in self.visited)
-        if result:
-            self.visited = [False] * len(self.matrix)
+        if len(self.stack) == 0:
+            replace = [False] * len(self.matrix)
+            self.visited = replace
 
     def bf_print(self, v):
-        self.checker()
         self.toPrint = []
         Q = []
         Q.insert(0, v)  # Enqueue
@@ -42,6 +36,9 @@ class Graph:
                     self.visited[nList[i]] = True
                     Q.insert(0, nList[i])  # Enqueue
         self.postVisit(v)
+        if len(self.stack) == 0:
+            replace = [False] * len(self.matrix)
+            self.visited = replace
 
     def preVisit(self, v):
         self.stack.append(v)
@@ -53,7 +50,7 @@ class Graph:
         nList = []
         nums = self.matrix[v]
         for i in nums:
-            if i != 0:  # WAS !=
+            if i != 0:
                 nList.append(nums.index(i))
         return nList
 
