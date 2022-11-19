@@ -4,6 +4,7 @@
 class Graph:
     def __init__(self, grid):
         self.matrix = grid
+        self.vertex_count = len(grid)
         self.visited = [False] * len(self.matrix)
         self.stack = []
         self.D = []
@@ -11,7 +12,7 @@ class Graph:
     def df_print(self, v):
         self.preVisit(v)
         self.visited[v] = True
-        print(str(v)+" ", end="")
+        self.D.append(v)
         nList = self.neighbors(v)
         for i in range(len(nList)):
             if self.visited[nList[i]] != True:
@@ -21,6 +22,14 @@ class Graph:
             replace = [False] * len(self.matrix)
             self.visited = replace
 
+    def preVisit(self, v):
+        print(str(v)+" ", end="")
+        # self.stack.append(v)
+        self.stack.insert(0, v)
+
+    def postVisit(self, v):
+        self.stack.remove(v)
+
     def bf_print(self, v):
         self.toPrint = []
         Q = []
@@ -28,7 +37,6 @@ class Graph:
         self.visited[v] = True
         while len(Q) > 0:
             v = Q.pop()  # Dequeue
-            print(str(v)+" ", end="")
             self.preVisit(v)
             nList = self.neighbors(v)
             for i in range(len(nList)):
@@ -40,18 +48,11 @@ class Graph:
             replace = [False] * len(self.matrix)
             self.visited = replace
 
-    def preVisit(self, v):
-        self.stack.append(v)
-
-    def postVisit(self, v):
-        self.stack.remove(v)
-
     def neighbors(self, v):
         nList = []
-        nums = self.matrix[v]
-        for i in nums:
-            if i != 0:
-                nList.append(nums.index(i))
+        for i in range(self.vertex_count):
+            if self.matrix[v][i] != 0:
+                nList.append(i)
         return nList
 
     def weight(self, a, b):
