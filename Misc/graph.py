@@ -25,8 +25,6 @@ class Graph:
 
     def preVisit(self, v):
         print(str(v)+" ", end="")
-        # self.D.append(v)
-        # self.stack.append(v)
         self.stack.insert(0, v)
 
     def postVisit(self, v):
@@ -34,7 +32,6 @@ class Graph:
 
     def bf_print(self, v):
         Q = []
-        # Q.insert(0, v)  # Enqueue
         Q.append(v)
         self.visited[v] = True
         while len(Q) > 0:
@@ -44,7 +41,6 @@ class Graph:
             for i in range(len(nList)):
                 if self.visited[nList[i]] != True:
                     self.visited[nList[i]] = True
-                    # Q.insert(0, nList[i])  # Enqueue
                     Q.append(nList[i])
             self.postVisit(v)
         if len(self.stack) == 0:
