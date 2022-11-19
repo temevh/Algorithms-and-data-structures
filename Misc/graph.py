@@ -21,9 +21,11 @@ class Graph:
         if len(self.stack) == 0:
             replace = [False] * len(self.matrix)
             self.visited = replace
+            print()
 
     def preVisit(self, v):
         print(str(v)+" ", end="")
+        # self.D.append(v)
         # self.stack.append(v)
         self.stack.insert(0, v)
 
@@ -31,9 +33,9 @@ class Graph:
         self.stack.remove(v)
 
     def bf_print(self, v):
-        self.toPrint = []
         Q = []
         Q.insert(0, v)  # Enqueue
+        # Q.append(v)
         self.visited[v] = True
         while len(Q) > 0:
             v = Q.pop()  # Dequeue
@@ -47,6 +49,7 @@ class Graph:
         if len(self.stack) == 0:
             replace = [False] * len(self.matrix)
             self.visited = replace
+        print()
 
     def neighbors(self, v):
         nList = []
@@ -87,18 +90,6 @@ if __name__ == "__main__":
     graph = Graph(matrix)
 
     graph.df_print(0)           # 0 2 1 3 5 4
-    print()
-    graph.df_print(1)           # 1
-    print()
-    graph.df_print(2)           # 2 1 3 0 4 5
-    print()
-    graph.df_print(3)           # 3 0 2 1 4 5
-    print()
-    graph.df_print(4)           # 4 5 1
-    print()
-    graph.df_print(5)           # 5 1
-    print()
-    # graph.bf_print(0)           # 0 2 4 1 3 5
-    # print()
-    # print(graph.weight(0, 2))   # 7
-    # print(graph.weight(3, 4))   # -1
+    graph.bf_print(0)           # 0 2 4 1 3 5
+    print(graph.weight(0, 2))   # 7
+    print(graph.weight(3, 4))   # -1
