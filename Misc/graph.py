@@ -1,10 +1,12 @@
 # Based on lecture material and openDSA 19.3
+# If starting vertex is 1, no neighbors
 
 class Graph:
     def __init__(self, grid):
         self.matrix = grid
         self.visited = [False] * len(self.matrix)
         self.stack = []
+        self.D = []
 
     def df_print(self, v):
         self.checker()
@@ -26,6 +28,7 @@ class Graph:
 
     def bf_print(self, v):
         self.checker()
+        self.toPrint = []
         Q = []
         Q.insert(0, v)  # Enqueue
         self.visited[v] = True
@@ -50,7 +53,7 @@ class Graph:
         nList = []
         nums = self.matrix[v]
         for i in nums:
-            if i != 0:
+            if i != 0:  # WAS !=
                 nList.append(nums.index(i))
         return nList
 
@@ -73,9 +76,31 @@ if __name__ == "__main__":
         [0, 6, 0, 0, 0, 0]  # 5
     ]
 
+    codeMatrix = [
+        [0, 5, 3, 6, 0, 6],
+        [0, 0, 0, 6, 0, 2],
+        [0, 1, 0, 3, 3, 4],
+        [0, 0, 0, 0, 0, 1],
+        [2, 2, 0, 3, 0, 4],
+        [0, 0, 0, 0, 0, 0]
+
+    ]
+
     graph = Graph(matrix)
 
     graph.df_print(0)           # 0 2 1 3 5 4
-    graph.bf_print(0)           # 0 2 4 1 3 5
-    print(graph.weight(0, 2))   # 7
-    print(graph.weight(3, 4))   # -1
+    print()
+    graph.df_print(1)           # 1
+    print()
+    graph.df_print(2)           # 2 1 3 0 4 5
+    print()
+    graph.df_print(3)           # 3 0 2 1 4 5
+    print()
+    graph.df_print(4)           # 4 5 1
+    print()
+    graph.df_print(5)           # 5 1
+    print()
+    # graph.bf_print(0)           # 0 2 4 1 3 5
+    # print()
+    # print(graph.weight(0, 2))   # 7
+    # print(graph.weight(3, 4))   # -1
