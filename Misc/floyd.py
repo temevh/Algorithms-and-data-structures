@@ -2,7 +2,22 @@ from graph import Graph
 
 
 def floyd(graph):
-    # TODO
+    max_value = 2147483647
+    # for line in graph.D:
+    #    print(line)
+    for i in range(graph.vertex_count):
+        for j in range(graph.vertex_count):
+            if graph.weight(i, j) != 0:
+                # print(graph.D[i][j])
+                graph.D[i][j] = graph.weight(i, j)
+
+    for k in range(graph.vertex_count):
+        for i in range(graph.vertex_count):
+            for j in range(graph.vertex_count):
+                if graph.D[i][k] != max_value and graph.D[k][j] != max_value and graph.D[i][j] > (graph.D[i][k] + graph.D[k][j]):
+                    graph.D[i][j] = graph.D[i][k] + graph.D[k][j]
+    # print(graph.D)
+    return graph.D
 
 
 if __name__ == "__main__":
