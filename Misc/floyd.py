@@ -1,29 +1,27 @@
+# Based on lecture materials and 19.8/9.1 openDSA material
 from graph import Graph
 
 
 def floyd(graph):
-    D = [[0 for i in range(graph.vertex_count)]
-         for j in range(graph.vertex_count)]
-
     for i in range(graph.vertex_count):
         for j in range(graph.vertex_count):
 
-            if graph.weight(i, j) != 0:
+            if graph.weight(i, j) > 0:
                 #print("i:", i, "j", j, "weight:", graph.weight(i, j))
-                D[i][j] = graph.weight(i, j)
+                graph.D[i][j] = graph.weight(i, j)
             else:
-                D[i][j] = 0
+                graph.D[i][j] = 0
 
     for k in range(graph.vertex_count):
         for i in range(graph.vertex_count):
             for j in range(graph.vertex_count):
-                if (D[i][k] != 0) and (D[k][j] != 0) and ((D[i][j] > (D[i][k] + D[k][j])) or D[i][j] == 0):
-                    D[i][j] = D[i][k] + D[k][j]
+                if (graph.D[i][k] != 0) and (graph.D[k][j] != 0) and ((graph.D[i][j] > (graph.D[i][k] + graph.D[k][j])) or graph.D[i][j] == 0):
+                    graph.D[i][j] = graph.D[i][k] + graph.D[k][j]
 
     for i in range(graph.vertex_count):
-        D[i][i] = 0
+        graph.D[i][i] = 0
 
-    return D
+    return graph.D
 
 
 if __name__ == "__main__":
