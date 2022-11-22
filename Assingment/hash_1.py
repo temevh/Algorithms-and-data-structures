@@ -22,7 +22,6 @@ class HashTable:
         if type(key) == int:
             for i in range(key):
                 hSum = i * mul * 256
-            print(hSum % self.SIZE)
             return hSum % self.SIZE
         else:
             # print("string")
@@ -34,7 +33,6 @@ class HashTable:
                 # Sum the ascii values of the key's characters, after multiplying with mul(tiplier)
                 hSum += ord(key[i]) * mul
         # End result is converted to the range 0 to M-1 using the hash table size and modulo operators
-            print(hSum % self.SIZE)
             return hSum % self.SIZE
 
     def adder(self, key):
@@ -53,20 +51,21 @@ class HashTable:
             self.arr[h].append(key)
 
     def getter(self, key):
-        key = str(key)
+        #key = str(key)
         spot = ""  # A placeholder variable for the potential info that is to be returned if the given key is found
         h = self.hasher(key)  # Calculate the hash
-        # print("Etsittävä hash ", h)
+        #print("Etsittävä hash ", h)
         i = 0
         # loop through the linked list at the given index(hash)
         for element in self.arr[h]:
-            # print(element)
             i += 1
             if element == key:  # If the current loop element matches the key to be searched for
                 spot = "Key ["+str(key) + "] found\nKey hash: " + \
                     str(h) + "\nKey is the " + str(i) + \
-                    ". element in list " + str(h+1)
+                    ". element in list " + str(h+1) + "\n"
+                print(spot)
                 return spot  # Add information to the spot variable, return it
+
                 # return "key found"
         else:
             print("key not found")  # If key not found, return "key not found"
@@ -122,11 +121,19 @@ class HashTable:
 
 
 t = HashTable(5)  # Initialize hash table with size 5
-t.adder("test")
+t.adder("test")  # Add words and integers to hash table
 t.adder(1234)
 t.adder("AAAA")
 t.adder("BBBB")
 t.adder(-12942)
 t.adder(420)
 t.adder("BM40A1500")
+
+t.getter(-12942)  # Seach the hash table for -12942, "test" and "BM40A1500"
+t.getter("test")
+t.getter("BM40A1500")
+
+t.delete("test")  # Delete test and -12942
+t.delete(-12942)
+
 t.printTable()
