@@ -3,15 +3,15 @@ from graph import Graph
 
 
 def dijkstragraph(G, s):
+    G.matrix = G.Backup
     G.alreadySeen = []
     G.D = [10000000000000] * G.vertex_count
     G.D[s] = 0
     toReturn = [[0 for i in range(G.vertex_count)]
                 for j in range(G.vertex_count)]
-    for j in range(G.vertex_count):
-        G.alreadySeen.append([j, None])
     for i in range(G.vertex_count):
         G.lastNodes.append([0, 0])
+        G.alreadySeen.append([i, None])
     for i in range(G.vertex_count):
         v = minVertex(G, G.D)
         G.alreadySeen[v][1] = True
@@ -23,12 +23,14 @@ def dijkstragraph(G, s):
             if (G.D[w]) > ((G.D[v]) + G.weight(v, w)):
                 G.D[w] = G.D[v] + G.weight(v, w)
                 G.lastNodes[w] = [v, w]
-    for i in range(len(G.lastNodes)):
-        x = G.lastNodes[i][0]
-        y = G.lastNodes[i][1]
-        if G.weight(x, y) == -1:
+    List = G.lastNodes
+    for i in range(len(List)):
+        a = List[i][0]
+        b = List[i][1]
+        if G.weight(a, b) == -1:
             continue
-        toReturn[x][y] = G.weight(x, y)
+        toReturn[a][b] = G.weight(a, b)
+
     G.matrix = toReturn
     return G
 
@@ -71,9 +73,14 @@ if __name__ == "__main__":
         [5, 1, 0, 0, 2, 0, 0, 0]
     ]
 
+    S = 1
     graph = Graph(matrix2)
     new_graph = dijkstragraph(graph, 0)
     new_graph.df_print(0)           # 0 1 2 3 4 5 6 7 9 8
     new_graph.bf_print(0)           # 0 1 2 3 4 5 6 7 8 9
+    print()
+    new_graph = dijkstragraph(graph, S)
+    new_graph.df_print(S)           # 0 1 2 3 4 5 6 7 9 8
+    new_graph.bf_print(S)
     print(new_graph.weight(3, 6))   # 4
     print(new_graph.weight(5, 8))   # -1
