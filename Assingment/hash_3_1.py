@@ -48,7 +48,6 @@ class HashTable:
         if not found:  # Else if the loop does not encounter the key
             # Add the key to the given list at the array
             self.arr[h].append(key)
-        # self.printTable()
 
     def addFromFile(self):  # Function to add words from a file to the hash table
         # Replace the first parameter with the file which the data should be read from
@@ -58,30 +57,27 @@ class HashTable:
             self.adder(line.strip())
 
     def getter(self, key):
-        #key = str(key)
-        spot = ""  # A placeholder variable for the potential info that is to be returned if the given key is found
         h = self.hasher(key)  # Calculate the hash
-        i = 0
         # loop through the linked list at the given index(hash)
         for element in self.arr[h]:
-            i += 1
-            if element == key:  # If the current loop element matches the key to be searched for
-                return 1  # Add information to the spot variable, return it
+            if element == key:
+                return 1  # If key found, return 1
         else:
-            # If key not found, return "key not found"
+            # If key not found, return 0
             return 0
 
     def comparer(self):
-        samat = []
+        matchList = []  # Initialize an empty list to contain the matching words
+        # Open file kaikkisanat.txt
         file = open("kaikkisanat.txt", "r", encoding="utf-8")
         matches = 0
         for line in file:
             if self.getter(line.strip()) == 1:
                 matches += 1
-                samat.append(line.strip())
-        file2 = open("matches.txt", "w", encoding="utf-8")
-        for item in samat:
-            file2.write(str(item)+"\n")
+                matchList.append(line.strip())
+        #file2 = open("matches.txt", "w", encoding="utf-8")
+        # for item in matches:
+        #    file2.write(str(item)+"\n")
         print("MATCHING WORDS:", matches)
 
     # Function to write (append) the results of runtimes to a file
@@ -125,4 +121,4 @@ print("Compare      |", "%.8f" % comp)
 print("-------------|----------------")
 print("Total runtime: ", "%.8f" % runtime_total)
 print("Table size:", t.SIZE)
-t.writeToFile(init, add, comp, runtime_total)
+#t.writeToFile(init, add, comp, runtime_total)
