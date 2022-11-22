@@ -24,7 +24,6 @@ class HashTable:
                 hSum = i * mul * 256
             return hSum % self.SIZE
         else:
-            # print("string")
             for i in range(len(str(key))):
                 if (i % 4 == 0):  # Process the key 4 letters at a time
                     mul = 1
@@ -51,8 +50,15 @@ class HashTable:
             self.arr[h].append(key)
         # self.printTable()
 
+    def addFromFile(self):  # Function to add words from a file to the hash table
+        # Replace the first parameter with the file which the data should be read from
+        file = open("words_alpha.txt", "r", encoding="utf-8")
+        for line in file:
+            # Pass the word from the file to the hash table, removing the newline(\n)
+            self.adder(line.strip())
+
     def getter(self, key):
-        key = str(key)
+        #key = str(key)
         spot = ""  # A placeholder variable for the potential info that is to be returned if the given key is found
         h = self.hasher(key)  # Calculate the hash
         i = 0
@@ -64,21 +70,6 @@ class HashTable:
         else:
             # If key not found, return "key not found"
             return 0
-
-    def addFromFile(self):  # Function to add words from a file to the hash table
-        # Replace the first parameter with the file which the data should be read from
-        file = open("words_alpha.txt", "r", encoding="utf-8")
-        for line in file:
-            # Pass the word from the file to the hash table, removing the newline(\n)
-            self.adder(line.strip())
-    # test
-
-    def printTable(self):
-        print("INDEX|ARRAY")  # Create a grid with the hearders INDEX and ARRAY
-        print("-----|-----------")
-        for i in range(self.SIZE):
-            print(i, str("   |"), self.arr[i])  # Add the current value
-        print("-----------------")
 
     def comparer(self):
         samat = []
@@ -93,6 +84,7 @@ class HashTable:
             file2.write(str(item)+"\n")
         print("MATCHING WORDS:", matches)
 
+    # Function to write (append) the results of runtimes to a file
     def writeToFile(self, init, add, comp, runtime_total):
         file = open("compareRuntimeHash100k2.txt", "a", encoding="utf-8")
         file.write("ACTION       |   RUNTIME(s)\n")
