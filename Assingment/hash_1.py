@@ -16,22 +16,30 @@ class HashTable:
         self.arr = [[] for i in range(self.SIZE)]
 
     def hasher(self, key):  # Calculate hash using string folding
-        key = str(key)  # Make sure the given key is a string
-        sum = 0  # Initializa sum to zero
+        # key = str(key)  # Make sure the given key is a string
+        hSum = 0  # Initializa sum to zero
         mul = 1  # Initialize mul to 1
-        for i in range(len(str(key))):
-            if (i % 4 == 0):  # Process the key 4 letters at a time
-                mul = 1
-            else:
-                mul = mul * 256
-            # Sum the ascii values of the key's characters, after multiplying with mul(tiplier)
-            sum += ord(key[i]) * mul
+        if type(key) == int:
+            for i in range(key):
+                hSum = i * mul * 256
+            print(hSum % self.SIZE)
+            return hSum % self.SIZE
+        else:
+            # print("string")
+            for i in range(len(str(key))):
+                if (i % 4 == 0):  # Process the key 4 letters at a time
+                    mul = 1
+                else:
+                    mul = mul * 256
+                # Sum the ascii values of the key's characters, after multiplying with mul(tiplier)
+                hSum += ord(key[i]) * mul
         # End result is converted to the range 0 to M-1 using the hash table size and modulo operators
-        return sum % self.SIZE
+            print(hSum % self.SIZE)
+            return hSum % self.SIZE
 
     def adder(self, key):
         h = self.hasher(key)  # Calculate hash
-        key = str(key)  # Make sure key is string
+        # key = str(key)  # Make sure key is string
         found = False  # Set found to false, found is used to check if key already exists, thus not allowing duplicates
         # By using enumerate, we can implement a counter in the loop (index)
         for index, element in enumerate(self.arr[h]):
@@ -73,9 +81,11 @@ class HashTable:
         return None
 
     def printTable(self):
-        print("INDEX|ARRAY")
+        print("INDEX|ARRAY")  # Create a grid with the hearders INDEX and ARRAY
+        print("-----|-----------")
         for i in range(self.SIZE):
-            print(i, str("   |"), self.arr[i])
+            print(i, str("   |"), self.arr[i])  # Add the current value
+        print("-----------------")
 
     def addFromFile(self):  # Function to add words from a file to the hash table
         # Replace the first parameter with the file which the data should be read from
@@ -111,18 +121,12 @@ class HashTable:
             file.write(str(elem)+"\n")
 
 
-st = time.time()  # Initialize start time to system time
-t = HashTable(100)  # Initialize hash table with size 10 000
-# t.addFromFile()  # Add words from kaikkisanat.txt to the hash table
-# Seach for the word "kirkkoväki" from the hash table
-t.adder(1254121)
-t.adder("testi")
-t.adder("AAAAAAAAAA")
-t.adder("R4PORPIHREHR")
-t.adder("rthkke+e")
-t.adder(15001)
-t.adder("kirkkoväki")
-print(t.getter("kirkkoväki"))
-et = time.time()  # Initialize end time to system time
-print("Total runtime: ", str(et-st)+"s")
-t.writeToFile()  # Write the complete hash table to file
+t = HashTable(5)  # Initialize hash table with size 5
+t.adder("test")
+t.adder(1234)
+t.adder("AAAA")
+t.adder("BBBB")
+t.adder(-12942)
+t.adder(420)
+t.adder("BM40A1500")
+t.printTable()
