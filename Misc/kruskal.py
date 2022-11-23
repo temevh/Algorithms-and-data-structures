@@ -1,9 +1,5 @@
 from graph import Graph
 
-# ParPerTree =
-# KVPair =
-#MinHeap = not needed
-
 
 def kruskal(graph):
     E = []
@@ -14,6 +10,29 @@ def kruskal(graph):
             E.append([graph.weight(i, nList[w]), [i, nList[w]]])
     E = sorted(E, key=lambda item: item[0])  # Sorted by weight
     numMST = graph.vertex_count
+    while numMST > 1:
+        temp = E.pop(0)
+        if temp == None:
+            return
+        v = temp[0]
+        u = temp[1]
+        if u != v:
+            union(v, u)
+            numMST -= 1
+
+
+def union(a, b):
+    root1 = find(a)
+    root2 = find(a)
+    if root1 != root2:
+        graph[root1] = root2
+
+
+def find(curr):
+    while graph[curr] != -1:
+        curr = graph[curr]
+
+    return curr
 
 
 if __name__ == "__main__":
