@@ -1,52 +1,71 @@
-# Based on lecture material and openDSA 19.3
+from queue import Queue
 
-class Graph:
+
+class Graph():
+
     def __init__(self, grid):
         self.matrix = grid
-        self.visited = [False] * len(self.matrix)
-        self.stack = []
+        self.v = len(grid)
+        self.visited = [False] * self.v
 
-    def df_print(self, v):
-        self.preVisit(v)
-        self.visited[v] = True
-        print(str(v)+" ", end="")
-        nList = self.neighbors(v)
-        for i in range(len(nList)):
-            if self.visited[nList[i]] != True:
-                self.df_print(nList[i])
-        self.postVisit(v)
+    def convert(self, a):
+        # adjadency matrix -> adjadency list
+        converted = {}
+        i = 0
+        for j in range(len(a)):
+            converted[i] = []
+            i += 1
 
-    def bf_print(self, v):
-        Q = []
-        Q.insert(0, v)
-        self.visited[v] = True
-        while len(Q) > 0:
-            v = Q.pop()
-            self.preVisit(v)
-            nList = self.neighbors(v)
-            for i in range(len(nList)):
-                if self.visited[nList[i]] != True:
-                    self.visited[nList[i]] = True
-                    Q.remove(nList[i])
-        self.postVisit(v)
+        k = 0
+        for elem in a:
+            for i in elem:
+                if i != 0:
+                    converted[k].append(elem.index(i))
+            k += 1
 
-    def preVisit(self, v):
-        self.stack.append(v)
+        # print(converted)
+        return converted
 
-    def postVisit(self, v):
-        self.stack.remove(v)
+    def df_print(self, start):
 
-    def neighbors(self, v):
-        nList = []
-        nums = self.matrix[v]
-        for i in nums:
-            if i != 0:
-                nList.append(nums.index(i))
-        return nList
+        graph = self.convert(self.matrix)
+        df = self.dfs(graph, start)
+        for elem in df:
+            print(elem, end=" ")
+        print()
 
-    def weight(self, a, b):
-        if self.matrix[a][b] != 0:
-            return (self.matrix[a][b])
+    def dfs(self, graph, start, path=[]):
+        path += [start]
+        for elem in graph[start]:
+            if elem not in path:
+                path = self.dfs(graph, elem, path)
+        return path
+
+    def bf_print(self, start):
+        graph = self.convert(self.matrix)
+        bf = self.bfs(graph, start)
+        for elem in bf:
+            print(elem, end=" ")
+        print()
+
+    def bfs(self, graph, source):
+        toReturn = []
+        q = Queue()
+        visited = set()
+        q.put(source)
+        visited.update({0})
+        while not q.empty():
+            vertex = q.get()
+            toReturn.append(vertex)
+            for elem in graph[vertex]:
+                if elem not in visited:
+                    q.put(elem)
+                    visited.update({elem})
+        return toReturn
+
+    def weight(self, v1, v2):
+        if self.matrix[v1][v2] != 0:
+            return (self.matrix[v1][v2])
         else:
             return -1
 
@@ -62,10 +81,9 @@ if __name__ == "__main__":
         [0, 0, 0, 0, 0, 1],  # 4
         [0, 6, 0, 0, 0, 0]  # 5
     ]
-
     graph = Graph(matrix)
 
     graph.df_print(0)           # 0 2 1 3 5 4
     graph.bf_print(0)           # 0 2 4 1 3 5
-    # print(graph.weight(0, 2))   # 7
-    # print(graph.weight(3, 4))   # -1
+    print(graph.weight(0, 2))   # 7
+    print(graph.weight(3, 4))   # -1

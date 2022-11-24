@@ -7,12 +7,17 @@ class Graph:
         self.vertex_count = len(grid)
         self.visited = [False] * len(self.matrix)
         self.stack = []
-        self.D = []
+        self.D = [[0 for i in range(self.vertex_count)]
+                  for j in range(self.vertex_count)]
+
+        self.alreadySeen = []
+        self.Backup = grid
+        self.lastNodes = []
+        self.BackUp = self.matrix
 
     def df_print(self, v):
         self.preVisit(v)
         self.visited[v] = True
-        self.D.append(v)
         nList = self.neighbors(v)
         for i in range(len(nList)):
             if self.visited[nList[i]] != True:
@@ -56,6 +61,8 @@ class Graph:
         return nList
 
     def weight(self, a, b):
+        if a >= self.vertex_count or b >= self.vertex_count:
+            return -1
         if self.matrix[a][b] != 0:
             return (self.matrix[a][b])
         else:

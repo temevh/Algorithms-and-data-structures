@@ -3,6 +3,7 @@ from graph import Graph
 
 def kruskal(graph):
     E = []
+    result = []
 
     for i in range(graph.vertex_count):
         nList = graph.neighbors(i)
@@ -18,6 +19,7 @@ def kruskal(graph):
         u = temp[1]
         if u != v:
             union(v, u)
+            result.append(v, u)
             numMST -= 1
 
 
@@ -27,8 +29,10 @@ def union(a, b):
     if root1 != root2:
         graph[root1] = root2
 
+# add arr
 
-def find(curr):
+
+def find(curr, arr):
     while graph[curr] != -1:
         curr = graph[curr]
 
