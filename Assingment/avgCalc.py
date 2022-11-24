@@ -13,10 +13,8 @@ while i < 82:
 
 arr2 = []
 for elem in arr:
-    # print((elem.strip()).split())
     arr2.append(float(((elem.strip()).split()[2])))
 
-# print(arr2)
 
 avg = sum(arr2)/len(arr2)
 

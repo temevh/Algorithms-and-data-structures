@@ -6,7 +6,6 @@
 # Worst case O(n) if all keys have the same hash, essentially the program goes through a linked list, and the complexity for list look-ups is O(n)
 # Duplicates not allowed
 
-
 import time
 
 
@@ -17,49 +16,63 @@ class HashTable:
         self.arr = [[] for i in range(self.SIZE)]
 
     def hasher(self, key):  # Calculate hash using string folding
-        key = str(key)  # Make sure the given key is a string
-        sum = 0  # Initializa sum to zero
+        # key = str(key)  # Make sure the given key is a string
+        hSum = 0  # Initializa sum to zero
         mul = 1  # Initialize mul to 1
-        for i in range(len(str(key))):
-            if (i % 4 == 0):  # Process the key 4 letters at a time
-                mul = 1
-            else:
-                mul = mul * 256
-            # Sum the ascii values of the key's characters, after multiplying with mul(tiplier)
-            sum += ord(key[i]) * mul
+        if type(key) == int:
+            for i in range(key):
+                hSum = i * mul * 256
+            return hSum % self.SIZE
+        else:
+            # print("string")
+            for i in range(len(str(key))):
+                if (i % 4 == 0):  # Process the key 4 letters at a time
+                    mul = 1
+                else:
+                    mul = mul * 256
+                # Sum the ascii values of the key's characters, after multiplying with mul(tiplier)
+                hSum += ord(key[i]) * mul
         # End result is converted to the range 0 to M-1 using the hash table size and modulo operators
-        return sum % self.SIZE
+            return hSum % self.SIZE
 
     def adder(self, key):
         h = self.hasher(key)  # Calculate hash
-        key = str(key)  # Make sure key is string
+        # key = str(key)  # Make sure key is string
         found = False  # Set found to false, found is used to check if key already exists, thus not allowing duplicates
         # By using enumerate, we can implement a counter in the loop (index)
-        for index, element in enumerate(self.arr[h]):
-            # If the length of the element is 2 and the current element is key
-            if len(element) == 2 and element[0] == key:
+        # for index, element in enumerate(self.arr[h]):
+        #print("element", element)
+        # If the key is already in the table
+        index = 0
+        for elem in self.arr[h]:
+            # if len(element) == 2 and element[0] == key:
+            if elem == key:
                 self.arr[h][index] = key
                 found = True  # Set found to true
                 break  # Do not add the key to the array
+            else:
+                index += 1
         if not found:  # Else if the loop does not encounter the key
             # Add the key to the given list at the array
             self.arr[h].append(key)
 
     def getter(self, key):
-        key = str(key)
+        #key = str(key)
         spot = ""  # A placeholder variable for the potential info that is to be returned if the given key is found
         h = self.hasher(key)  # Calculate the hash
-        print("Etsittävä hash ", h)
+        #print("Etsittävä hash ", h)
         i = 0
         # loop through the linked list at the given index(hash)
         for element in self.arr[h]:
-            print(element)
             i += 1
             if element == key:  # If the current loop element matches the key to be searched for
-                spot = "Key found\nKey hash: " + \
+                spot = "Key ["+str(key) + "] found\nKey hash: " + \
                     str(h) + "\nKey is the " + str(i) + \
-                    " nth element in list " + str(h)
+                    ". element in list " + str(h+1) + "\n"
+                print(spot)
                 return spot  # Add information to the spot variable, return it
+
+                # return "key found"
         else:
             print("key not found")  # If key not found, return "key not found"
 
@@ -73,42 +86,30 @@ class HashTable:
         return None
 
     def printTable(self):
-        print("INDEX|ARRAY")
+        print("INDEX|ARRAY")  # Create a grid with the hearders INDEX and ARRAY
+        print("-----|-----------")
         for i in range(self.SIZE):
-            print(i, str("   |"), self.arr[i])
-
-    def addFromFile(self):  # Function to add words from a file to the hash table
-        # Replace the first parameter with the file which the data should be read from
-        file = open("kaikkisanat.txt", "r", encoding="utf-8")
-        for line in file:
-            # Pass the word from the file to the hash table, removing the newline(\n)
-            self.adder(line.strip())
-
-    # A test function to write the hash table to file, to make sure everything gets added
-    def writeToFile(self):
-        file = open("hashResult.txt", "w", encoding="utf-8")
-        for element in self.arr:
-            file.write(str(element)+"\n")
-
-    # A function to print each hash table element on its own line to help with troubleshooting etc.
-    def writeToFile2(self):
-        file = open("hashResult.txt", "w", encoding="utf-8")
-        for line in self.arr:
-            for elem in line:
-                file.write(str(elem)+"\n")
-
-    def writeOrdered(self):
-        words = []
-        file = open("hashOrdered.txt", "w", encoding="utf-8")
-        for line in self.arr:
-            for elem in line:
-                words.append(elem)
-        words.sort()
-        for elem in words:
-            file.write(str(elem)+"\n")
+            print(i, str("   |"), self.arr[i])  # Add the current value
+        print("-----------------")
 
 
-t = HashTable(10000)
-t.addFromFile()
-print(t.getter("kirkkoväki"))
-t.writeToFile()
+t = HashTable(3)  # Initialize hash table with size 5
+t.adder(4328989)
+t.adder(4328989)
+
+t.adder("test")  # Add words and integers to hash table
+t.adder("testi123")
+t.adder("BBBB")
+t.adder(-12942)
+t.adder(420)
+t.adder("kush")
+
+
+t.getter(-12942)  # Seach the hash table for -12942, "test" and "BM40A1500"
+t.getter("test")
+t.getter("BM40A1500")
+
+t.delete("test")  # Delete test and -12942
+t.delete(-12942)
+
+t.printTable()

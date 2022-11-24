@@ -1,3 +1,6 @@
+import itertools
+
+
 def sums(items):
     arr = [[]]
     toReturn = []
@@ -6,7 +9,8 @@ def sums(items):
             tmp = [items[i]] + num
             arr.append(tmp)
             toReturn.append(sum(tmp))
-    return len(list(dict.fromkeys(toReturn)))
+    toReturn = list(dict.fromkeys(toReturn))
+    return len(toReturn)
 
 
 if __name__ == "__main__":

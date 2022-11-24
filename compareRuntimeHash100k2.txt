@@ -1,0 +1,40 @@
+ACTION       |   RUNTIME(s)
+-------------|----------------
+Table init   |0.01402688
+Add to table |1.73697019
+Compare      |0.48900151
+-------------|----------------
+Total runtime: 2.23999858
+Table size: 100000
+ACTION       |   RUNTIME(s)
+-------------|----------------
+Table init   |0.01203012
+Add to table |1.89396763
+Compare      |0.52600169
+-------------|----------------
+Total runtime: 2.43199944
+Table size: 100000
+ACTION       |   RUNTIME(s)
+-------------|----------------
+Table init   |0.01302958
+Add to table |1.88096166
+Compare      |0.49999976
+-------------|----------------
+Total runtime: 2.39399099
+Table size: 100000
+ACTION       |   RUNTIME(s)
+-------------|----------------
+Table init   |0.01303196
+Add to table |1.76996684
+Compare      |0.47100806
+-------------|----------------
+Total runtime: 2.25400686
+Table size: 100000
+ACTION       |   RUNTIME(s)
+-------------|----------------
+Table init   |0.01504660
+Add to table |1.91197753
+Compare      |0.52004576
+-------------|----------------
+Total runtime: 2.44706988
+Table size: 100000
