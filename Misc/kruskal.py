@@ -2,13 +2,7 @@ from graph import Graph
 
 class parTree:
     def __init__(self, M) -> None:
-            self.arr = self.treePar(M)
-
-    def treePar(self, M):
-        arr = []
-        for i in range(M):
-            arr.append(-1)
-        return arr
+            self.arr = [-1 for i in range(M)]
 
     def UNION(self, i, j):
         root1 = self.FIND(i)
@@ -27,13 +21,12 @@ class parTree:
 def kruskal(graph):
     E = []
     result = []
-    #print(graph.vertex_count)
-    A = parTree(graph.vertex_count)
+    kru = parTree(graph.vertex_count)
     for i in range(graph.vertex_count):
         nList = graph.neighbors(i)
         for w in range(len(nList)):
             E.append([graph.weight(i, nList[w]), [i, nList[w]]])
-    E = sorted(E, key=lambda item: item[0])  # Sorted by weight
+    E = sorted(E, key=lambda item: item[0])  # Sort by weight
     numMST = graph.vertex_count
     while numMST > 1:
         temp = E.pop(0)
@@ -42,11 +35,18 @@ def kruskal(graph):
             return
         v = temp[1][0]
         u = temp[1][1]
-        if A.UNION(v,u):
+        if kru.UNION(v,u):
             result.append([v,u])
             numMST -= 1
-    #print(result)
-    graph.matrix =  result
+    matrixified = [[0 for i in range(graph.vertex_count)] for j in range(graph.vertex_count)]
+    for i in range(len(result)):
+        a = result[i][0]
+        b = result[i][1]
+        if graph.weight(a,b) == -1:
+            continue
+        matrixified[a][b] = graph.weight(a,b)
+        matrixified[b][a] = graph.weight(a,b)
+    graph.matrix =  matrixified
     return graph
 
 
