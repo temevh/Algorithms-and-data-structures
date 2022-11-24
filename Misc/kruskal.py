@@ -10,26 +10,25 @@ class parTree:
             arr.append(-1)
         return arr
 
-    def UNION(self, i, j, arr):
-        root1 = FIND(i, arr)
-        root2 = FIND(j, arr)
+    def UNION(self, i, j):
+        root1 = self.FIND(i)
+        root2 = self.FIND(j)
         if (root1 != root2):
-            array[root1] = root2
+            self.arr[root1] = root2
             return True
         else:
             return False
 
-    def FIND(self,curr, arr):
-        while graph[curr] != -1:
-            curr = graph[curr]
-
+    def FIND(self,curr):
+        while self.arr[curr] != -1:
+            curr = self.arr[curr]
         return curr
 
 def kruskal(graph):
     E = []
     result = []
+    #print(graph.vertex_count)
     A = parTree(graph.vertex_count)
-    print(A)
     for i in range(graph.vertex_count):
         nList = graph.neighbors(i)
         for w in range(len(nList)):
@@ -38,15 +37,17 @@ def kruskal(graph):
     numMST = graph.vertex_count
     while numMST > 1:
         temp = E.pop(0)
+        #temp = E.pop()
         if temp == None:
             return
-        v = temp[0]
-        u = temp[1]
-        if UNION(v,u):
+        v = temp[1][0]
+        u = temp[1][1]
+        if A.UNION(v,u):
             result.append([v,u])
             numMST -= 1
-
-
+    #print(result)
+    graph.matrix =  result
+    return graph
 
 
 if __name__ == "__main__":
@@ -63,4 +64,4 @@ if __name__ == "__main__":
     graph = Graph(matrix)
     graph.bf_print(0)   # 0 2 3 4 1 5
     mst = kruskal(graph)
-    # mst.bf_print(0)     # 0 3 2 1 5 4
+    mst.bf_print(0)     # 0 3 2 1 5 4
