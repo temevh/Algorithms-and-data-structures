@@ -5,8 +5,8 @@ class Node:
     
 class hashTable:
     def __init__(self, size) -> None:
-        self.tableSize = size
-        self.lists = [Node(None) for i in range(self.tableSize)]
+        self.SIZE = size
+        self.lists = [Node(None) for i in range(self.SIZE)]
 
     def adder(self, data):
         h = self.hasher(data)
@@ -38,9 +38,9 @@ class LinkedList:
         self.head = None
         self
 
-
     
 
 if __name__ == "__main__":
     ht = hashTable(3)
+    
 
