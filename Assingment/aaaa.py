@@ -36,7 +36,9 @@ class HashTable:
     def insert(self, key):
         #print(len(self.lists))
         h = self.hasher(key)
-        print(h, key)
+        x = self.find(key)
+        if x == True:  #Check if key is already in the table
+            return #If key already found, return, to not allow duplicates
         addTo = self.lists[h]
         node = Node(key)
         if addTo.head is None:
@@ -93,10 +95,11 @@ class HashTable:
         temp = findFrom.head
         while temp:
             if temp.data == key:
-                print("KEY", key, "FOUND")
-                return
+                print("KEY", key, "FOUND IN LIST" , h)
+                return True
             temp = temp.next
         print("KEY", key, "NOT FOUND")
+        return False
         
 
 
@@ -106,7 +109,5 @@ ht.insert("uhuh")
 ht.insert(2141)
 ht.insert("ääkkösiä")
 ht.printer()
-ht.find("testi")
-ht.delete("testi")
-ht.find("testi")
+ht.insert("testi")
 ht.printer()
