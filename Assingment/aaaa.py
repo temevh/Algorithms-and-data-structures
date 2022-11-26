@@ -56,8 +56,36 @@ class HashTable:
                 strList.append(itr.data)
                 itr = itr.next
             print(strList)
+    
+    def delete2(self, key):
+        h = self.hasher(key)
+        delFrom = self.lists[h]
+        itr = delFrom.head
+        while itr:
+            if itr.data == key:
+                print("FOUND")
+                return
+            itr = itr.next
+        print("NOT FOUND")
 
-
+    def delete(self, key):
+        h = self.hasher(key)
+        delFrom = self.lists[h]
+        temp = delFrom.head
+        if temp is not None:
+            if temp.data == key:
+                delFrom.head = temp.next
+                temp = None
+                return
+        while temp is not None:
+            if temp.data == key:
+                break
+            prev = temp
+            temp = temp.next
+        if temp == None:
+            return
+        prev.next = temp.next
+        temp = None
 
 
 ht = HashTable(3)
@@ -65,4 +93,6 @@ ht.insert("testi")
 ht.insert("uhuh")
 ht.insert(2141)
 ht.insert("ääkkösiä")
+ht.printer()
+ht.delete("testi")
 ht.printer()
