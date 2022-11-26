@@ -34,7 +34,6 @@ class HashTable:
             return hSum % self.tableSize
 
     def insert(self, key):
-        #print(len(self.lists))
         h = self.hasher(key)
         x = self.find(key)
         if x == True:  #Check if key is already in the table
@@ -49,7 +48,7 @@ class HashTable:
             last = last.next
         last.next = node
 
-    def printer(self):
+    def printTable(self):
         for i in range(self.tableSize):
             x = self.lists[i]
             itr = x.head
@@ -57,19 +56,9 @@ class HashTable:
             while itr:
                 strList.append(itr.data)
                 itr = itr.next
-            print(strList)
+            print(i, strList)
+        print()
     
-    def delete2(self, key):
-        h = self.hasher(key)
-        delFrom = self.lists[h]
-        itr = delFrom.head
-        while itr:
-            if itr.data == key:
-                print("FOUND")
-                return
-            itr = itr.next
-        print("NOT FOUND")
-
     def delete(self, key):
         h = self.hasher(key)
         delFrom = self.lists[h]
@@ -95,11 +84,17 @@ class HashTable:
         temp = findFrom.head
         while temp:
             if temp.data == key:
-                print("KEY", key, "FOUND IN LIST" , h)
                 return True
             temp = temp.next
-        print("KEY", key, "NOT FOUND")
         return False
+
+    def findPrint(self, key):
+        h = self.hasher(key)
+        result = self.find(key)
+        if result == True:
+            print("KEY", key, "FOUND IN LIST" , h)
+        elif result == False:
+            print("KEY", key, "NOT FOUND")
         
 
 
@@ -108,6 +103,7 @@ ht.insert("testi")
 ht.insert("uhuh")
 ht.insert(2141)
 ht.insert("ääkkösiä")
-ht.printer()
+ht.printTable()
 ht.insert("testi")
-ht.printer()
+ht.printTable()
+ht.findPrint("testi")
