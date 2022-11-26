@@ -87,6 +87,18 @@ class HashTable:
         prev.next = temp.next
         temp = None
 
+    def find(self, key):
+        h = self.hasher(key)
+        findFrom = self.lists[h]
+        temp = findFrom.head
+        while temp:
+            if temp.data == key:
+                print("KEY", key, "FOUND")
+                return
+            temp = temp.next
+        print("KEY", key, "NOT FOUND")
+        
+
 
 ht = HashTable(3)
 ht.insert("testi")
@@ -94,5 +106,7 @@ ht.insert("uhuh")
 ht.insert(2141)
 ht.insert("ääkkösiä")
 ht.printer()
+ht.find("testi")
 ht.delete("testi")
+ht.find("testi")
 ht.printer()
