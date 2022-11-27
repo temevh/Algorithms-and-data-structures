@@ -34,9 +34,6 @@ class HashTable:
 
     def insert(self, key):
         h = self.hasher(key)
-        #x = self.find(key)
-        #if x == True:  #Check if key is already in the table
-        #    return #If key already found, return, to not allow duplicates
         addTo = self.lists[h]
         node = Node(key)
         if addTo.head is None:
@@ -59,6 +56,46 @@ class HashTable:
                 itr = itr.next
             print(i, strList)
         print()
+
+    def find(self, key):
+        h = self.hasher(key)
+        findFrom = self.lists[h]
+        temp = findFrom.head
+        while temp:
+            if temp.data == key:
+                return True
+            temp = temp.next
+        return False
+
+    def findPrint(self, key):
+        h = self.hasher(key)
+        result = self.find(key)
+        if result == True:
+            print("KEY", key, "FOUND IN LIST" , h)
+        elif result == False:
+            print("KEY", key, "NOT FOUND")
+    
+    def delete(self, key):
+        h = self.hasher(key)
+        delFrom = self.lists[h]
+        temp = delFrom.head
+        if temp is not None:
+            if temp.data == key:
+                delFrom.head = temp.next
+                temp = None
+                print("REMOVED KEY ", key, "FROM TABLE")
+                return
+        while temp is not None:
+            if temp.data == key:
+                break
+            prev = temp
+            temp = temp.next
+        if temp == None:
+            return
+        prev.next = temp.next
+        temp = None
+        print("REMOVED KEY ", key, "FROM TABLE")
+        
     
     
 ht = HashTable(3)
@@ -69,3 +106,13 @@ ht.insert(4328989)
 ht.insert("BM40A1500")
 ht.insert(-12456)
 ht.insert("aaaabbbbcccc")
+
+ht.findPrint(-12456)
+ht.findPrint("hashtable")
+ht.findPrint(1235)
+
+ht.delete("BM40A1500")
+ht.delete(1234)
+ht.delete("aaaabbbbcccc")
+
+ht.printTable()
