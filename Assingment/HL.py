@@ -48,27 +48,27 @@ class HashTable:
         last.next = node #When there is no more elements to cycle through, add the key
 
     def printTable(self):
-        for i in range(self.tableSize):
-            x = self.lists[i]
-            itr = x.head
-            strList = []
+        for i in range(self.tableSize): #Initialize the loop to go through all of the linked lists
+            x = self.lists[i] #Current list chosen with index
+            itr = x.head #initialize itr to head of current list
+            strList = [] #Empty array for list elements
             #print("INDEX   LIST")
-            while itr:
-                strList.append(itr.data)
-                itr = itr.next
-            print(i, strList)
+            while itr: #While iterator has data
+                strList.append(itr.data) #Append the data to strList 
+                itr = itr.next #Go to next element
+            print(i, strList) #Print the list with iterator index 
         print()
     
     def delete(self, key):
-        h = self.hasher(key)
-        delFrom = self.lists[h]
-        temp = delFrom.head
-        if temp is not None:
-            if temp.data == key:
-                delFrom.head = temp.next
-                temp = None
-                return
-        while temp is not None:
+        h = self.hasher(key)  #Determine the hash
+        delFrom = self.lists[h] #Choose the correct list to delete from
+        temp = delFrom.head #Set temp to head of the chosen list
+        if temp is not None: #If the head is not empty
+            if temp.data == key: #If the head data matches the desired key
+                delFrom.head = temp.next #Set head to the next key from temp ("skip over the key to delete")
+                temp = None #Set temp to None
+                return #Exit function
+        while temp is not None: 
             if temp.data == key:
                 break
             prev = temp
