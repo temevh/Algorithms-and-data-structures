@@ -36,9 +36,9 @@ class HashTable:
 
     def insert(self, key):
         h = self.hasher(key)
-        #x = self.find(key)
-        #if x == True:  #Check if key is already in the table
-        #    return #If key already found, return, to not allow duplicates
+        x = self.find(key)
+        if x == True:  #Check if key is already in the table
+            return #If key already found, return, to not allow duplicates
         addTo = self.lists[h]
         node = Node(key)
         if addTo.head is None:
@@ -117,13 +117,16 @@ class HashTable:
         file.close()
         
 
-
+total = 0
 st = time.time()
 ht = HashTable(10000)
 ht.addFromFile()
 et = time.time()
+total = total + (et-st)
 print(et-st)
 st = time.time()
 ht.compare()
 et = time.time()
 print(et-st)
+total = total + (et-st)
+print("TOTAL RUNTIME", total)
