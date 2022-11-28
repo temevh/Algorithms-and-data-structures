@@ -32,20 +32,20 @@ class HashTable:
         # End result is converted to the range 0 to M-1 using the hash table size and modulo operators
             return hSum % self.tableSize
 
+    #Function to insert keys to the hash table/linked list
     def insert(self, key):
-        h = self.hasher(key)
-        x = self.find(key)
-        if x == True:  #Check if key is already in the table
-            return #If key already found, return, to not allow duplicates
-        addTo = self.lists[h]
-        node = Node(key)
-        if addTo.head is None:
-            addTo.head = node
-            return
-        last = addTo.head
-        while last.next:
-            last = last.next
-        last.next = node
+        h = self.hasher(key)   #Calculate the hash for the key, store in h
+        if self.find(key):  #If the key is already stored in the hash table
+            return #Exit the insert function
+        addTo = self.lists[h] #Determine which linked list the key should be added to
+        node = Node(key) #Create a Node class object with key
+        if addTo.head is None: #If the head of the linked list is None
+            addTo.head = node  #Make the key the head
+            return #Exit function
+        last = addTo.head #Else if head is not empty set last to head 
+        while last.next: #Cycle through list elements 
+            last = last.next 
+        last.next = node #When there is no more elements to cycle through, add the key
 
     def printTable(self):
         for i in range(self.tableSize):
@@ -98,16 +98,7 @@ class HashTable:
         
 
 
-ht = HashTable(5)
+ht = HashTable(3)
 ht.insert("testi")
-ht.insert("uhuh")
-ht.insert(2141)
-ht.insert("ääkkösiä")
-ht.insert("arvo1")
-ht.insert("väli lyönti")
-ht.insert("diibadaaba")
-ht.insert("liibalaaba")
-ht.insert("vittu")
-ht.insert(":D")
-ht.insert(512515)
+ht.insert("testi")
 ht.printTable()
