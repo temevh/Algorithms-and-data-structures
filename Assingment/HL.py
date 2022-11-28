@@ -68,33 +68,34 @@ class HashTable:
                 delFrom.head = temp.next #Set head to the next key from temp ("skip over the key to delete")
                 temp = None #Set temp to None
                 return #Exit function
-        while temp is not None: 
-            if temp.data == key:
-                break
-            prev = temp
-            temp = temp.next
-        if temp == None:
-            return
-        prev.next = temp.next
-        temp = None
+        while temp is not None: #While an element exists in temp 
+            if temp.data == key: #If temp.data is the desired key
+                break #Stop the loop
+            prev = temp #Set previous to temp 
+            temp = temp.next #Temp is the next element
+        if temp == None: #If there is no next element from temp (desired key is the last element)
+            return #Exit the function
+        prev.next = temp.next #Set prev.next to temp.next
+        temp = None #Set temp to None
 
     def find(self, key):
-        h = self.hasher(key)
-        findFrom = self.lists[h]
-        temp = findFrom.head
-        while temp:
-            if temp.data == key:
-                return True
-            temp = temp.next
-        return False
+        h = self.hasher(key) #Determine the hash
+        findFrom = self.lists[h] #Choose which list to find from 
+        temp = findFrom.head #Set temp to head of chosen list
+        while temp: #While an element exists 
+            if temp.data == key: #If current data matches the key
+                return True #Return true (key can be found)
+            temp = temp.next #Move temp one element forward
+        return False #If whole list has been examined without finding element, its safe to assume that 
+        #It does not exist and False will be returned to signify this.
 
     def findPrint(self, key):
-        h = self.hasher(key)
-        result = self.find(key)
-        if result == True:
-            print("KEY", key, "FOUND IN LIST" , h)
-        elif result == False:
-            print("KEY", key, "NOT FOUND")
+        h = self.hasher(key) #Determine the hash
+        result = self.find(key) #Get result from find function
+        if result == True: #If key exists in list
+            print("KEY", key, "FOUND IN LIST" , h) #Inform the user
+        elif result == False: #Else the key does not exist
+            print("KEY", key, "NOT FOUND") #Inform the user
         
 
 
