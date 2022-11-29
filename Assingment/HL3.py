@@ -1,19 +1,21 @@
 import time
 
+
 class Node:
-    def __init__(self, data, next = None):
+    def __init__(self, data, next=None):
         self.data = data
         self.next = next
+
 
 class LinkedList:
     def __init__(self):
         self.head = None
-    
+
+
 class HashTable:
     def __init__(self, M) -> None:
         self.tableSize = M
         self.lists = [LinkedList() for j in range(self.tableSize)]
-
 
     def hasher(self, key):  # Calculate hash using string folding
         # key = str(key)  # Make sure the given key is a string
@@ -37,8 +39,8 @@ class HashTable:
     def insert(self, key):
         h = self.hasher(key)
         x = self.find(key)
-        if x == True:  #Check if key is already in the table
-            return #If key already found, return, to not allow duplicates
+        if x == True:  # Check if key is already in the table
+            return  # If key already found, return, to not allow duplicates
         addTo = self.lists[h]
         node = Node(key)
         if addTo.head is None:
@@ -60,7 +62,7 @@ class HashTable:
                 itr = itr.next
             print(i, strList)
         print()
-    
+
     def delete(self, key):
         h = self.hasher(key)
         delFrom = self.lists[h]
@@ -94,7 +96,7 @@ class HashTable:
         h = self.hasher(key)
         result = self.find(key)
         if result == True:
-            print("KEY", key, "FOUND IN LIST" , h)
+            print("KEY", key, "FOUND IN LIST", h)
         elif result == False:
             print("KEY", key, "NOT FOUND")
 
@@ -102,31 +104,39 @@ class HashTable:
         file = open("words_alpha.txt", "r", encoding="UTF-8")
         for line in file:
             self.insert(line.strip())
-    
-        print("WORDS ADDED")
+
+        #print("WORDS ADDED")
         file.close()
 
     def compare(self):
         matches = 0
         file = open("kaikkisanat.txt", "r", encoding="UTF-8")
         for line in file:
-             if self.find(line.strip()):
+            if self.find(line.strip()):
                 matches += 1
 
         print("MATCHING WORDS", matches)
         file.close()
-        
+
 
 total = 0
+
 st = time.time()
 ht = HashTable(10000)
+et = time.time()
+print("TIME TAKEN TO INITIALIZE TABLE: ", et-st)
+total = total + (et-st)
+
+st = time.time()
 ht.addFromFile()
 et = time.time()
+print("TIME TO ADD WORDS FROM FILE: ", et-st)
 total = total + (et-st)
-print(et-st)
+
 st = time.time()
 ht.compare()
 et = time.time()
-print(et-st)
+print("TIME TAKEN TO COMPARE FILES: ", et-st)
 total = total + (et-st)
+
 print("TOTAL RUNTIME", total)
