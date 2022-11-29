@@ -92,7 +92,7 @@ class HashTable:
             temp = temp.next
         return False
 
-    def findPrint(self, key):
+    def search(self, key):
         h = self.hasher(key)
         result = self.find(key)
         if result == True:
@@ -118,25 +118,53 @@ class HashTable:
         print("MATCHING WORDS", matches)
         file.close()
 
+    def worst(self):
+        wo = 0
+        wolist = 0
+        for i in range(self.tableSize):
+            temp = self.lists[i].head
+            count = 0
+            while (temp):
+                count += 1
+                temp = temp.next
+            if count > wo:
+                wo = count
+                wolist = i
+        print("Worst list", wolist, "with ", wo, "elements")
+
 
 total = 0
+add, comp, init = 0, 0, 0
 
 st = time.time()
 ht = HashTable(10000)
 et = time.time()
-print("TIME TAKEN TO INITIALIZE TABLE: ", et-st)
-total = total + (et-st)
+#print("TIME TAKEN TO INITIALIZE TABLE: ", et-st)
+#total = total + (et-st)
+init = et - st
 
 st = time.time()
 ht.addFromFile()
 et = time.time()
-print("TIME TO ADD WORDS FROM FILE: ", et-st)
-total = total + (et-st)
+#print("TIME TO ADD WORDS FROM FILE: ", et-st)
+#total = total + (et-st)
+add = et-st
 
 st = time.time()
 ht.compare()
 et = time.time()
-print("TIME TAKEN TO COMPARE FILES: ", et-st)
-total = total + (et-st)
+#print("TIME TAKEN TO COMPARE FILES: ", et-st)
+#total = total + (et-st)
+comp = et-st
 
-print("TOTAL RUNTIME", total)
+runtime_total = init+add+comp
+print("ACTION       |   RUNTIME(s)")
+print("-------------|----------------")
+print("init. table  |", "%.8f" % init)
+print("Add to table |", "%.8f" % add)
+print("Compare      |", "%.8f" % comp)
+print("-------------|----------------")
+print("Total runtime: ", "%.8f" % runtime_total)
+
+# ht.printTable()
+ht.worst()
