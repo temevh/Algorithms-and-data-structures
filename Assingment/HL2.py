@@ -1,17 +1,18 @@
 class Node:
-    def __init__(self, data, next = None):
+    def __init__(self, data, next=None):
         self.data = data
         self.next = next
+
 
 class LinkedList:
     def __init__(self):
         self.head = None
-    
+
+
 class HashTable:
     def __init__(self, M) -> None:
         self.tableSize = M
         self.lists = [LinkedList() for j in range(self.tableSize)]
-
 
     def hasher(self, key):  # Calculate hash using string folding
         # key = str(key)  # Make sure the given key is a string
@@ -67,14 +68,20 @@ class HashTable:
             temp = temp.next
         return False
 
-    def findPrint(self, key):
-        h = self.hasher(key)
-        result = self.find(key)
-        if result == True:
-            print("KEY", key, "FOUND IN LIST" , h)
-        elif result == False:
-            print("KEY", key, "NOT FOUND")
-    
+    def search(self, key):
+        h = self.hasher(key)  # Determine the hash
+        result = self.find(key)  # Get result from find function
+        if result == True:  # If key exists in list
+            if type(key) == int:
+                print("KEY", key, "FOUND IN LIST", h, "\n")  # Inform the user
+            else:
+                print("KEY '" + str(key) + "' FOUND IN LIST", h, "\n")
+        elif result == False:  # Else the key does not exist
+            if type(key) == int:
+                print("KEY", key, "NOT FOUND", "\n")  # Inform the user
+            else:
+                print("KEY '" + str(key) + "' NOT FOUND", "\n")
+
     def delete(self, key):
         h = self.hasher(key)
         delFrom = self.lists[h]
@@ -83,7 +90,7 @@ class HashTable:
             if temp.data == key:
                 delFrom.head = temp.next
                 temp = None
-                print("REMOVED KEY ", key, "FROM TABLE")
+                print("REMOVED KEY ", key, "\n")
                 return
         while temp is not None:
             if temp.data == key:
@@ -94,11 +101,11 @@ class HashTable:
             return
         prev.next = temp.next
         temp = None
-        print("REMOVED KEY ", key, "FROM TABLE")
-        
-    
-    
+        print("REMOVED KEY ", key, "\n")
+
+
 ht = HashTable(3)
+
 ht.insert(12)
 ht.insert("hashtable")
 ht.insert(1234)
@@ -107,9 +114,9 @@ ht.insert("BM40A1500")
 ht.insert(-12456)
 ht.insert("aaaabbbbcccc")
 
-ht.findPrint(-12456)
-ht.findPrint("hashtable")
-ht.findPrint(1235)
+ht.search(-12456)
+ht.search("hashtable")
+ht.search(1235)
 
 ht.delete("BM40A1500")
 ht.delete(1234)
