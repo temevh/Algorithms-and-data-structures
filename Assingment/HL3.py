@@ -118,9 +118,11 @@ class HashTable:
         print("MATCHING WORDS", matches)
         file.close()
 
-    def worst(self):
+    def minMax(self):
         wo = 0
         wolist = 0
+        be = 15151515151
+        belist = 0
         for i in range(self.tableSize):
             temp = self.lists[i].head
             count = 0
@@ -130,7 +132,11 @@ class HashTable:
             if count > wo:
                 wo = count
                 wolist = i
+            elif count < wo:
+                be = count
+                belist = i
         print("Worst list", wolist, "with ", wo, "elements")
+        print(f'Best list {belist} with {be} elements')
 
 
 total = 0
@@ -167,4 +173,4 @@ print("-------------|----------------")
 print("Total runtime: ", "%.8f" % runtime_total)
 
 # ht.printTable()
-ht.worst()
+ht.minMax()
