@@ -38,9 +38,9 @@ class HashTable:
 
     def insert(self, key):
         h = self.hasher(key)
-        x = self.find(key)
-        if x == True:  # Check if key is already in the table
-            return  # If key already found, return, to not allow duplicates
+
+        if self.find(key):
+            return
         addTo = self.lists[h]
         node = Node(key)
         if addTo.head is None:
