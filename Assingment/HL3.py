@@ -76,7 +76,7 @@ class HashTable:
         print("MATCHING WORDS", matches)
         file.close()
 
-    def minMax(self):
+    def minMax(self):  # Auxiliary function to determine the max and min lists
         wo = 0
         wolist = 0
         be = 15151515151
@@ -101,24 +101,18 @@ total = 0
 add, comp, init = 0, 0, 0
 
 st = time.time()
-ht = HashTable(10000)
+ht = HashTable(10_000)
 et = time.time()
-#print("TIME TAKEN TO INITIALIZE TABLE: ", et-st)
-#total = total + (et-st)
 init = et - st
 
 st = time.time()
 ht.addFromFile()
 et = time.time()
-#print("TIME TO ADD WORDS FROM FILE: ", et-st)
-#total = total + (et-st)
 add = et-st
 
 st = time.time()
 ht.compare()
 et = time.time()
-#print("TIME TAKEN TO COMPARE FILES: ", et-st)
-#total = total + (et-st)
 comp = et-st
 
 runtime_total = init+add+comp
@@ -131,4 +125,4 @@ print("-------------|----------------")
 print("Total runtime: ", "%.8f" % runtime_total)
 
 # ht.printTable()
-ht.minMax()
+# ht.minMax()
