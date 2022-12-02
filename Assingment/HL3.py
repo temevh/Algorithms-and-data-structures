@@ -18,13 +18,11 @@ class HashTable:
         self.lists = [LinkedList() for j in range(self.tableSize)]
 
     def hasher(self, key):  # Calculate hash using string folding
-        # key = str(key)  # Make sure the given key is a string
         hSum = 0  # Initializa sum to zero
         mul = 1  # Initialize mul to 1
-        if type(key) == int:
-            for i in range(key):
-                hSum = i * mul * 256
-            return hSum % self.tableSize
+        if type(key) == int:  # If the type of the key is int
+            # Return the multiplication of key 2654435761 and modulo of tablesize
+            return (key * 2654435761) % self.tableSize
         else:
             for i in range(len(str(key))):
                 if (i % 4 == 0):  # Process the key 4 letters at a time
@@ -103,7 +101,7 @@ total = 0
 add, comp, init = 0, 0, 0
 
 st = time.time()
-ht = HashTable(100000)
+ht = HashTable(10000)
 et = time.time()
 #print("TIME TAKEN TO INITIALIZE TABLE: ", et-st)
 #total = total + (et-st)

@@ -15,13 +15,11 @@ class HashTable:
         self.lists = [LinkedList() for j in range(self.tableSize)]
 
     def hasher(self, key):  # Calculate hash using string folding
-        # key = str(key)  # Make sure the given key is a string
         hSum = 0  # Initializa sum to zero
         mul = 1  # Initialize mul to 1
-        if type(key) == int:
-            for i in range(key):
-                hSum = i * mul * 256
-            return hSum % self.tableSize
+        if type(key) == int:  # If the type of the key is int
+            # Return the multiplication of key 2654435761 and modulo of tablesize
+            return (key * 2654435761) % self.tableSize
         else:
             for i in range(len(str(key))):
                 if (i % 4 == 0):  # Process the key 4 letters at a time
@@ -36,7 +34,7 @@ class HashTable:
     # Function to insert keys to the hash table/linked list
     def insert(self, key):
         h = self.hasher(key)  # Calculate the hash for the key, store in h
-        if self.find(key):  # If the key is already stored in the hash table
+        if self.find(key, h):  # If the key is already stored in the hash table
             return  # Exit the insert function
         # Determine which linked list the key should be added to
         addTo = self.lists[h]
@@ -55,7 +53,6 @@ class HashTable:
             x = self.lists[i]  # Current list chosen with index
             itr = x.head  # initialize itr to head of current list
             strList = []  # Empty array for list elements
-            #print("INDEX   LIST")
             while itr:  # While iterator has data
                 strList.append(itr.data)  # Append the data to strList
                 itr = itr.next  # Go to next element
@@ -83,8 +80,8 @@ class HashTable:
         prev.next = temp.next  # Set prev.next to temp.next
         temp = None  # Set temp to None
 
-    def find(self, key):
-        h = self.hasher(key)  # Determine the hash
+    def find(self, key, h):
+        # h = self.hasher(key)  # Determine the hash
         findFrom = self.lists[h]  # Choose which list to find from
         temp = findFrom.head  # Set temp to head of chosen list
         while temp:  # While an element exists
@@ -96,7 +93,7 @@ class HashTable:
 
     def search(self, key):
         h = self.hasher(key)  # Determine the hash
-        result = self.find(key)  # Get result from find function
+        result = self.find(key, h)  # Get result from find function
         if result == True:  # If key exists in list
             if type(key) == int:
                 print("KEY", key, "FOUND IN LIST", h, "\n")  # Inform the user

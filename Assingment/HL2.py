@@ -18,13 +18,11 @@ class HashTable:
         self.lists = [LinkedList() for j in range(self.tableSize)]
 
     def hasher(self, key):  # Calculate hash using string folding
-        # key = str(key)  # Make sure the given key is a string
         hSum = 0  # Initializa sum to zero
         mul = 1  # Initialize mul to 1
-        if type(key) == int:
-            # for i in range(key):
-            #    hSum = i * mul * 12
-            return (key * 111) % self.tableSize
+        if type(key) == int:  # If the type of the key is int
+            # Return the multiplication of key 2654435761 and modulo of tablesize
+            return (key * 2654435761) % self.tableSize
         else:
             for i in range(len(str(key))):
                 if (i % 4 == 0):  # Process the key 4 letters at a time
@@ -38,6 +36,8 @@ class HashTable:
 
     def insert(self, key):
         h = self.hasher(key)  # Calculate hash
+        if self.find(key):  # If key already exists in hash table (duplicate)
+            return  # Exit the function
         addTo = self.lists[h]  # Choose which list the key should be added to
         node = Node(key)  # Give the key as data for node
         if addTo.head is None:  # If the head of the linked list is empty
