@@ -24,7 +24,6 @@ class HashTable:
         if type(key) == int:
             # for i in range(key):
             #    hSum = i * mul * 12
-            print((key * 111) % self.tableSize)
             return (key * 111) % self.tableSize
         else:
             for i in range(len(str(key))):
@@ -43,13 +42,13 @@ class HashTable:
         node = Node(key)  # Give the key as data for node
         if addTo.head is None:  # If the head of the linked list is empty
             addTo.head = node  # Make the current key/node head
-            # self.printTable()
+            self.printTable()
             return
         last = addTo.head  # ITerate through the linked list
         while last.next:  # While iterator has a next node
             last = last.next  # Go to next
         last.next = node  # When the node without next is reached the node is set to that
-        # self.printTable()
+        self.printTable()
 
     def printTable(self):
         for i in range(self.tableSize):
@@ -63,72 +62,69 @@ class HashTable:
         print()
 
     def find(self, key):
-        h = self.hasher(key)
-        findFrom = self.lists[h]
-        temp = findFrom.head
-        while temp:
-            if temp.data == key:
-                return True
-            temp = temp.next
-        return False
+        h = self.hasher(key)  # Calculate the hash
+        findFrom = self.lists[h]  # Choose which list to find the key from
+        temp = findFrom.head  # Set temp to head of chosen list
+        while temp:  # While temp exists
+            if temp.data == key:  # If the data at current node equals to the key to be searched
+                return True  # If key found, return true
+            temp = temp.next  # Go to next node if data does not match key
+        return False  # If key not found, return false
 
-    def search(self, key):
+    def search(self, key):  # Auxiliary function to get a clearer output from find
         h = self.hasher(key)  # Determine the hash
         result = self.find(key)  # Get result from find function
         if result == True:  # If key exists in list
             if type(key) == int:
-                print("KEY", key, "FOUND IN LIST", h, "\n")  # Inform the user
+                print("KEY", key, "FOUND IN LIST", h)  # Inform the user
             else:
-                print("KEY '" + str(key) + "' FOUND IN LIST", h, "\n")
+                print("KEY '" + str(key) + "' FOUND IN LIST", h)
         elif result == False:  # Else the key does not exist
             if type(key) == int:
-                print("KEY", key, "NOT FOUND", "\n")  # Inform the user
+                print("KEY", key, "NOT FOUND")  # Inform the user
             else:
-                print("KEY '" + str(key) + "' NOT FOUND", "\n")
+                print("KEY '" + str(key) + "' NOT FOUND")
 
     def delete(self, key):
-        h = self.hasher(key)
-        delFrom = self.lists[h]
-        temp = delFrom.head
-        if temp is not None:
-            if temp.data == key:
-                delFrom.head = temp.next
-                temp = None
-                print("REMOVED KEY ", key, "\n")
+        h = self.hasher(key)  # Calculate the hash
+        delFrom = self.lists[h]  # Choose which list to delete from
+        temp = delFrom.head  # Set temp to head of chosen list
+        if temp is not None:  # If node exists
+            if temp.data == key:  # If nodes data is equal to key to be deleted
+                delFrom.head = temp.next  # "Skip over" the node, effectively removing it
+                temp = None  # Reset temp to none
+                print("REMOVED KEY ", key)  # Inform user
                 return
-        while temp is not None:
-            if temp.data == key:
+        while temp is not None:  # while temp exists
+            if temp.data == key:  # If the data at the temp node is the key
                 break
-            prev = temp
+            prev = temp  # Iterate the list
             temp = temp.next
         if temp == None:
             return
         prev.next = temp.next
         temp = None
-        print("REMOVED KEY ", key, "\n")
+        print("REMOVED KEY ", key)
 
 
 ht = HashTable(3)
 
-st = time.time()
 ht.insert(12)
 ht.insert("hashtable")
 ht.insert(1234)
+ht.insert(4328989)
 ht.insert("BM40A1500")
 ht.insert(-12456)
 ht.insert("aaaabbbbcccc")
-ht.insert(151125125125)
-et = time.time()
 # ht.printTable()
 
 
-# ht.search(-12456)
-# ht.search("hashtable")
-# ht.search(1235)
+ht.search(-12456)
+ht.search("hashtable")
+ht.search(1235)
 
-# ht.delete("BM40A1500")
-# ht.delete(1234)
-# ht.delete("aaaabbbbcccc")
+ht.delete("BM40A1500")
+ht.delete(1234)
+ht.delete("aaaabbbbcccc")
 
-# ht.printTable()
-print("TIME TO ADD", (et-st)/6)
+ht.printTable()
