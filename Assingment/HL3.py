@@ -37,83 +37,43 @@ class HashTable:
             return hSum % self.tableSize
 
     def insert(self, key):
-        h = self.hasher(key)
-
-        if self.find(key):
+        h = self.hasher(key)  # Calculate the hash
+        if self.find(key):  # If key already exists in the hash table
+            return  # Exit the function
+        addTo = self.lists[h]  # Choose which list the key should be added to
+        node = Node(key)  # Give node the key as data
+        if addTo.head is None:  # If the head of the linked list is empty
+            addTo.head = node  # Make the current key/node head
             return
-        addTo = self.lists[h]
-        node = Node(key)
-        if addTo.head is None:
-            addTo.head = node
-            return
-        last = addTo.head
-        while last.next:
-            last = last.next
-        last.next = node
-
-    def printTable(self):
-        for i in range(self.tableSize):
-            x = self.lists[i]
-            itr = x.head
-            strList = []
-            #print("INDEX   LIST")
-            while itr:
-                strList.append(itr.data)
-                itr = itr.next
-            print(i, strList)
-        print()
-
-    def delete(self, key):
-        h = self.hasher(key)
-        delFrom = self.lists[h]
-        temp = delFrom.head
-        if temp is not None:
-            if temp.data == key:
-                delFrom.head = temp.next
-                temp = None
-                return
-        while temp is not None:
-            if temp.data == key:
-                break
-            prev = temp
-            temp = temp.next
-        if temp == None:
-            return
-        prev.next = temp.next
-        temp = None
+        last = addTo.head  # ITerate through the linked list
+        while last.next:  # While iterator has a next node
+            last = last.next  # Go to next
+        last.next = node  # When the node without next is reached the node is set to that
 
     def find(self, key):
-        h = self.hasher(key)
-        findFrom = self.lists[h]
-        temp = findFrom.head
-        while temp:
-            if temp.data == key:
-                return True
-            temp = temp.next
-        return False
-
-    def search(self, key):
-        h = self.hasher(key)
-        result = self.find(key)
-        if result == True:
-            print("KEY", key, "FOUND IN LIST", h)
-        elif result == False:
-            print("KEY", key, "NOT FOUND")
+        h = self.hasher(key)  # Calculate the hash
+        findFrom = self.lists[h]  # Choose which list to find the key from
+        temp = findFrom.head  # Set temp to head of chosen list
+        while temp:  # While temp exists
+            if temp.data == key:  # If the data at current node equals to the key to be searched
+                return True  # If key found, return true
+            temp = temp.next  # Go to next node if data does not match key
+        return False  # If key not found, return false
 
     def addFromFile(self):
-        file = open("words_alpha.txt", "r", encoding="UTF-8")
-        for line in file:
+        file = open("words_alpha.txt", "r", encoding="UTF-8")  # Open file
+        for line in file:  # Go through the file one line at a time
+            # Insert the line to hash table without newline
             self.insert(line.strip())
-
-        #print("WORDS ADDED")
-        file.close()
+        file.close()  # Close the file
 
     def compare(self):
-        matches = 0
-        file = open("kaikkisanat.txt", "r", encoding="UTF-8")
-        for line in file:
+        matches = 0  # Set the amount of matches to 0
+        file = open("kaikkisanat.txt", "r", encoding="UTF-8")  # Open file
+        for line in file:  # Go through the file one line at a time
+            # If the key can be found from the hash table (find = True)
             if self.find(line.strip()):
-                matches += 1
+                matches += 1  # Increase matches
 
         print("MATCHING WORDS", matches)
         file.close()
@@ -143,7 +103,7 @@ total = 0
 add, comp, init = 0, 0, 0
 
 st = time.time()
-ht = HashTable(10000)
+ht = HashTable(100000)
 et = time.time()
 #print("TIME TAKEN TO INITIALIZE TABLE: ", et-st)
 #total = total + (et-st)
